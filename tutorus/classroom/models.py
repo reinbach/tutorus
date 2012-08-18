@@ -13,12 +13,13 @@ from questions import constants as question_constants
 
 log = logging.getLogger(__name__)
 
+
 class ClassRoom(TimeStampedModel):
     """ ClassRoom
     """
     STATUS = Choices('draft', 'active', 'closed')
 
-    name =  models.CharField(_('name'), max_length=255, blank=True)
+    name = models.CharField(_('name'), max_length=255, blank=True)
     tutor = models.ForeignKey(User, verbose_name=_('tutor'))
     description = models.TextField(blank=True, null=True, default="")
     status = StatusField(default=STATUS.draft)

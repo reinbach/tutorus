@@ -16,6 +16,7 @@ from scratchpad.models import Scratchpad
 
 log = logging.getLogger(__name__)
 
+
 def tutor_only(func):
     def decorator(request, classroom_id):
         classroom = ClassRoom.objects.get(pk=classroom_id)
@@ -24,6 +25,7 @@ def tutor_only(func):
         messages.info(request, "You are not the Tutor")
         return HttpResponseRedirect(reverse('class_home'))
     return decorator
+
 
 @login_required
 def create_classroom(request):
@@ -35,7 +37,8 @@ def create_classroom(request):
         if form.is_valid():
             try:
                 classroom = form.save(request.user)
-                return HttpResponseRedirect(reverse('class_create_step', args=[classroom.pk]))
+                return HttpResponseRedirect(reverse('class_create_step',
+                                                    args=[classroom.pk]))
             except Exception as e:
                 #TODO: fix me.
                 print("ERROR {0}".format(e))
@@ -44,8 +47,9 @@ def create_classroom(request):
     else:
         form = ClassRoomForm()
 
-    context = {'form':form}
+    context = {'form': form}
     return render(request, 'classroom/create.html', context)
+
 
 @login_required
 @tutor_only
@@ -58,7 +62,8 @@ def edit_classroom(request, classroom):
         if form.is_valid():
             try:
                 classroom = form.save(request.user)
-                return HttpResponseRedirect(reverse('class_create_step', args=[classroom.pk]))
+                return HttpResponseRedirect(reverse('class_create_step',
+                                                    args=[classroom.pk]))
             except Exception as e:
                 #TODO: fix me.
                 print("ERROR {0}".format(e))
@@ -68,14 +73,16 @@ def edit_classroom(request, classroom):
     else:
         form = ClassRoomForm(instance=classroom)
 
-    context = {'form':form}
+    context = {'form': form}
     return render(request, 'classroom/create.html', context)
+
 
 @login_required
 @tutor_only
 def class_create_step(request, classroom):
     context = {'classroom': classroom}
     return render(request, 'classroom/steps.html', context)
+
 
 @login_required
 @tutor_only
@@ -84,6 +91,7 @@ def class_activate(request, classroom):
     classroom.save()
     context = {'classroom': classroom}
     return render(request, 'classroom/steps.html', context)
+
 
 @login_required
 def class_take(request, classroom_id):
@@ -114,8 +122,10 @@ def class_take(request, classroom_id):
     )
     return render(request, "classroom/take_student.html", context)
 
+
 def home(request):
     context = dict(
-        classrooms=ClassRoom.objects.all() # so we get something change later filter(status='active')
+        classrooms=ClassRoom.objects.all()  # so we get something change
+                                              # later filter(status='active')
     )
     return render(request, "classroom/index.html", context)
