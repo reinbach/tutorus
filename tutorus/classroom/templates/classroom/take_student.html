@@ -40,7 +40,8 @@
              type: "GET",
              url: $(this).attr("href"),
              success: function(data) {
-               $("question_" + data.success).hide();
+               var d = $.parseJSON(data);
+               $("#question-" + d.success).hide();
              }
           });
           return false;
