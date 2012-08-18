@@ -1,8 +1,13 @@
-(function(){
+function channel_subscribe(channel) {
+    pubnub = PUBNUB.init({
+        publish_key: $("#pubnub").attr("pub-key"),
+        subscribe_key: $("#pubnub").attr("sub-key"),
+        ssl: false,
+    });
 
     // LISTEN FOR MESSAGES
-    PUBNUB.subscribe({
-        channel    : "hello_world",      // CONNECT TO THIS CHANNEL.
+    pubnub.subscribe({
+        channel    : channel,      // CONNECT TO THIS CHANNEL.
         restore    : false,              // STAY CONNECTED, EVEN WHEN BROWSER IS CLOSED
                                          // OR WHEN PAGE CHANGES.
 
@@ -23,12 +28,12 @@
 
         connect    : function() {        // CONNECTION ESTABLISHED.
 
-            PUBNUB.publish({             // SEND A MESSAGE.
-                channel : "hello_world",
+            pubnub.publish({             // SEND A MESSAGE.
+                channel : channel,
                 message : "Hi from PubNub."
             })
 
         }
     })
 
-})();
+}

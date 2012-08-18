@@ -4,8 +4,11 @@
 {% block title %}{{ classroom.name }} {% trans "Class in Session" %}{% endblock title %}
 
 {% block page-js %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/classroom.js"></script>
     <script type="text/javascript">
       $(function() {
+        channel_subscribe("classroom_{{ classroom.pk }}");
+
         $(".collapse").collapse();
 
         $("#ask_question_form").submit(function(event){
@@ -17,9 +20,13 @@
              data: $(this).serializeArray(),
              success: function(data) {
                var d = $.parseJSON(data);
-               //test
-               console.log(d);
-               form.reset();
+               if (d.success) {
+                 form[0].reset();
+                 // alert question
+               } else {
+                 // highlight error fields
+                 console.log(d);
+               }
              }
            });
        });
