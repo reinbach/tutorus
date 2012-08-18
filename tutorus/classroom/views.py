@@ -1,5 +1,6 @@
 import logging
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -92,6 +93,7 @@ def class_take(request, classroom_id):
     context = dict(
         classroom=classroom,
         user=request.user,
+        latest_questions_count=settings.LATEST_QUESTIONS_COUNT,
     )
     if classroom.is_tutor(request.user):
         context.update(tutor=True)
