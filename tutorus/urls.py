@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from user.forms import SignupFormExtra
 
@@ -15,7 +16,4 @@ urlpatterns = patterns(
     (r'^step/', include('step.urls')),
 )
 
-if settings.DEBUG:
-    # conditionally serve static files
-    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-    urlpatterns += staticfiles_urlpatterns()
+urlpatterns += staticfiles_urlpatterns()
