@@ -1,8 +1,10 @@
-from django.conf.urls import patterns, include, url
-from .views import create_classroom, class_create_step, home
+from django.conf.urls import patterns, url
+import views
 
-urlpatterns = patterns('',
-    url(r'^create/$', create_classroom, name='classroom_create'),
-    url(r'^(?P<classroom_id>\w+)/$', class_create_step, name='class_create_step'),
-    url(r'^$', home, name='classroom_home'),
+urlpatterns = patterns(
+    '',
+    url(r'^create/$', views.create_classroom, name='class_create'),
+    url(r'^(?P<classroom_id>\w+)/$', views.class_create_step, name='class_create_step'),
+    url(r'^(?P<classroom_id>\w+)/activate/$', views.class_activate, name='class_activate'),
+    url(r'^$', views.home, name='class_home'),
 )

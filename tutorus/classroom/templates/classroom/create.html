@@ -9,31 +9,31 @@
       <h1>Create Classroom <small>bringing knowledge to the world</small></h1>
     </div>
     <div class="row">
-<form class="form-horizontal" action="" enctype="multipart/form-data" method="post">
-  <fieldset>
-    <div class="control-group">
-      <label class="control-label" for="input01">Class Name</label>
-      <div class="controls">
-        {{form.name}}
-        <p class="help-block"></p>
-      </div>
-    </div>
-    
-    <div class="control-group">
-      <label class="control-label" for="input01">Description</label>
-      <div class="controls">
-        {{form.description}}
-        <p class="help-block"></p>
-      </div>
-    </div>
-    <div class="form-actions">
+      <form class="form-horizontal" action="" enctype="multipart/form-data" method="post">
+        <fieldset>
+          <div class="control-group">
+            <label class="control-label" for="input01">Class Name</label>
+            <div class="controls">
+              {{form.name}}
+              <p class="help-block"></p>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="input01">Description</label>
+            <div class="controls">
+              {{form.description}}
+              <p class="help-block"></p>
+            </div>
+          </div>
+          <div class="form-actions">
             <button type="submit" class="btn btn-primary">Save changes</button>
             <a class='btn' href='{% url home %}'>Cancel</a>
-    </div>
-  </fieldset>
+          </div>
+        </fieldset>
 
-{% csrf_token %}
-</form>
+        {% csrf_token %}
+      </form>
     </div>
   </section>
 {% endblock %}
