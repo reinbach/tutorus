@@ -29,7 +29,7 @@ def ask_question(request, classroom):
     if request.method == 'POST':
         form = AskQuestionForm(data=request.POST)
         if form.is_valid():
-            question = form.save(request.user)
+            question = form.save(request.user, classroom)
             message = {"success": True}
             pubnub = get_pubnub_connection()
             pubnub.publish({

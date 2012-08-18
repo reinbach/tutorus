@@ -7,8 +7,9 @@ class AskQuestionForm(forms.ModelForm):
         model = Question
         exclude=('classroom', 'status', 'student',)
 
-    def save(self, user, commit=True):
+    def save(self, user, classroom, commit=True):
         question = super(AskQuestionForm, self).save(commit=False)
         question.student = user
+        question.classroom = classroom
         question.save()
         return question
