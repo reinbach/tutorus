@@ -12,11 +12,13 @@ function channel_subscribe(channel, username) {
         callback: function(message) {
             // determine which type of message
             // and handle accordingly
-//test
-console.log(message);
-            if (message.type == "student_connected") {
+            switch (message.type) {
+            case "student_connected":
+                incrementStudentCount();
                 console.log(message.name + " connected");
-            } else {
+            case "new_question":
+                addQuestion(message.question);
+            default:
                 console.log(message.type);
             }
         },
@@ -43,4 +45,16 @@ console.log(message);
     });
 
     return pubnub;
+}
+
+function incrementStudentCount() {
+    // get student count element
+    // grab the value increment by 1
+    // set value
+}
+
+function addQuestion(question) {
+    // question added to asked list
+    // if asked list greater then set #
+    // remove older questions
 }
