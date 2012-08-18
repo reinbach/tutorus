@@ -14,8 +14,15 @@ class ClassRoom(TimeStampedModel):
     tutor = models.ForeignKey(User, verbose_name=_('tutor'))
     description = models.TextField(blank=True, null=True, default="")
     status = StatusField(default=STATUS.draft)
-    
-    
+
     @property
     def steps(self):
         return self.step_set.all()
+
+    def is_active(self):
+        return True if self.status == "active" else False
+
+    def is_tutor(self, user):
+        if user == self.tutor:
+            return True
+        return False
