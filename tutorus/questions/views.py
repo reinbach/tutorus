@@ -30,12 +30,19 @@ def ask_question(request, classroom):
         form = AskQuestionForm(data=request.POST)
         if form.is_valid():
             question = form.save(request.user)
-            message = "success"
+            message = {"success": True}
             pubnub = get_pubnub_connection()
             pubnub.publish({
                 "channel": "classroom_{0}".format(classroom.pk),
-                "message": {"question": question.__dict__}
+                "message": {
+                    "question": {
+                        "subject": question.subject,
+                        'content': question.content,
+                        'student': question.student.username
+                    }
+                }
             })
-        message = json.dumps({"error": form.errors})
-        return HttpResponse(message)
+        else:
+            message = {"error": form.errors}
+        return HttpResponse(json.dumps(message))
     return HttpResponseNotFound("Need to post")
