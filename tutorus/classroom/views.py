@@ -66,9 +66,12 @@ def class_take(request, classroom):
     context = dict(
         classroom=classroom
     )
+    #test
+    log.info(request.user)
     if classroom.is_tutor(request.user):
         context.update(tutor=True)
-    return render(request, "classroom/take.html", context)
+        return render(request, "classroom/take.html", context)
+    return render(request, "classroom/take_student.html", context)
 
 def home(request):
     context = dict(
