@@ -8,6 +8,7 @@
       $(function() {
         $("#stepModal").modal("show");
       });
+      
     </script>
 {% endblock page-js %}
 
@@ -37,9 +38,9 @@
         <div class="tab-content">
           {% for step in classroom.steps %}
             <div class="tab-pane{% if forloop.first %} active{%endif %}" id="step{{step.pk}}">
+                <a class='btn btn-primary btn-mini' href="{% url step_edit classroom.pk step.pk %}">Edit Step</a>
                 <div class="well" style="padding: 8px 0; height: 450px;">
                  <p>{{step.content}}</p>
-                 <a class='btn btn-primary' href="{% url step_edit classroom.pk step.pk %}">Edit Step</a>
                 </div>
             </div>
           {% empty %}
@@ -70,4 +71,5 @@
 
 {% csrf_token %}
 </form>
+
 {% endblock %}

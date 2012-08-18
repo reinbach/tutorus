@@ -8,6 +8,63 @@
       $(function() {
         $(".collapse").collapse();
       });
+
+      $(function() {
+
+          $('.btnNext').on('click', function() {
+              nextTab(); 
+          });
+      
+          $('.btnPrev').on('click', function() {
+              prevTab();
+          });
+  
+          $('a[data-toggle="tab"]').on('shown', function (e) {
+            isLastTab();
+            isFirstTab();
+          });
+
+    });
+
+    function nextTab() {
+      var e = $('#steps li.active').next().find('a[data-toggle="tab"]');
+      if(e.length > 0) {
+          e.click();
+      }  
+      isLastTab();
+    }
+    
+    function prevTab(elem) {
+      var e = $('#steps li.active').prev().find('a[data-toggle="tab"]');  
+      if(e.length > 0) e.click();  
+      isFirstTab();
+    }
+
+     function isLastTab() {
+      var e = $('#steps li:last').hasClass('active');
+      
+      if( e ){
+          $('.btnNext').hide(); 
+      }else{
+          $('.btnNext').show();
+      }
+      return e;
+    }
+
+    function isFirstTab() {
+      var e = $('#steps li:first').hasClass('active');
+      if( e ){ 
+          $('.btnPrev').hide(); 
+      }else{
+          $('.btnPrev').show();
+      }
+      return e;
+    }
+      
+      
+      
+      
+      
     </script>
 {% endblock page-js %}
 
@@ -20,8 +77,7 @@
 
       <div class="span8">
         <div class="tabbable tabs-left">
-          <ul class="nav nav-tabs">
-            <li class="nav-header">Steps</li>
+          <ul class="nav nav-tabs" id='steps'>
               {% for step in classroom.steps %}
                 <li{% if forloop.first %} class='active'{%endif %}>
                   <a href="#step{{step.pk}}" data-toggle="tab">{{step.name}}</a>
@@ -84,7 +140,7 @@
       </div>
       <div class="span4">
         <h3>Controls</h3>
-
+        <a href="#" class="btn btn-primary btnPrev" style="display: none;">Previous step</a> <a href="#" class="btn btn-primary btnNext" >Next step</a> 
       </div>
     </div>
   </section>
