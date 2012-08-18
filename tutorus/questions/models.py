@@ -20,3 +20,8 @@ class Question(models.Model):
     classroom = models.ForeignKey(ClassRoom, blank=None, null=True)
     student = models.ForeignKey(User, verbose_name=_('student'))
     created = models.DateTimeField(auto_now_add=True)
+
+
+class QuestionVotes(models.Model):
+    question = models.ForeignKey(Question)
+    voter = models.ForeignKey(User, verbose_name=_('voter'))
