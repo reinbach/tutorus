@@ -18,7 +18,7 @@ DATABASES = {
         'NAME': 'tutorus',
         'USER': '',
         'PASSWORD': '',
-        'HOST': '',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
@@ -82,15 +82,32 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, "templates"),
 )
 
-INSTALLED_APPS = (
+PREREQ_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'south',
+)
+
+PROJECT_APPS = (
+    'scratchpad',
     'core',
 )
+
+INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS
+
+#TEST_RUNNER = 'testrunner.OurTestRunner'
+TEST_RUNNER = 'testrunner.OurCoverageRunner'
+
+COVERAGE_MODULE_EXCLUDES = [
+    'tests$', 'settings$', 'urls$', 'locale$',
+    'migrations', 'fixtures', 'admin$',
+    ]
+COVERAGE_MODULE_EXCLUDES += PREREQ_APPS
+COVERAGE_REPORT_HTML_OUTPUT_DIR = "coverage"
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
