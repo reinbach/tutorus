@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -14,3 +15,4 @@ class Question(models.Model):
                               choices=constants.QUESTION_CHOICES,
                               default=constants.ASKED)
     classroom = models.ForeignKey(ClassRoom, blank=None, null=True)
+    student = models.ForeignKey(User, verbose_name=_('student'))
