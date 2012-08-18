@@ -1,3 +1,19 @@
+$(function() {
+    $(".up_vote").on("click", function(event) {
+        event.preventDefault();
+        var question = $(this);
+        $.ajax({
+            type: "GET",
+            url: $(this).attr("href"),
+            success: function(data) {
+                var d = $.parseJSON(data);
+                $("#question-" + d.success).hide();
+            }
+        });
+        return false;
+    });
+});
+
 function channel_subscribe(channel, username) {
     pubnub = PUBNUB.init({
         publish_key: $("#pubnub").attr("pub-key"),

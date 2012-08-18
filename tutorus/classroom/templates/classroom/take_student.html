@@ -32,21 +32,6 @@
            });
            return false;
         });
-
-        $(".up_vote").on("click", function(event) {
-          event.preventDefault();
-          var question = $(this);
-          $.ajax({
-             type: "GET",
-             url: $(this).attr("href"),
-             success: function(data) {
-               var d = $.parseJSON(data);
-               $("#question-" + d.success).hide();
-             }
-          });
-          return false;
-        });
-
       });
     </script>
 {% endblock page-js %}
