@@ -10,8 +10,8 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding field 'Question.student'
         db.add_column('questions_question', 'student',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=None, to=orm['auth.User']),
-                      keep_default=False)
+                      self.gf('django.db.models.fields.related.ForeignKey')(
+                          default='', to=orm['auth.User']), keep_default=False)
 
 
     def backwards(self, orm):
