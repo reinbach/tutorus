@@ -1,5 +1,5 @@
 $(function() {
-    $(".up_vote").on("click", function(event) {
+    $("#new-questions").on("click", ".up_vote", function(event) {
         event.preventDefault();
         var question = $(this);
         $.ajax({
@@ -32,10 +32,13 @@ function channel_subscribe(channel, username) {
             case "student_connected":
                 incrementStudentCount();
                 console.log(message.name + " connected");
+                break;
             case "new_question":
                 addQuestion(message.question);
+                break;
             default:
                 console.log(message.type);
+                break;
             }
         },
 
@@ -71,6 +74,22 @@ function incrementStudentCount() {
 
 function addQuestion(question) {
     // question added to asked list
+    q = "<li id='question-" + question.pk + "'> \
+      <h4> \
+        <a href='" + question.up_vote_url + "' class='up_vote'> \
+          <span class='label label-success'><i class='icon-arrow-up'></i></span> \
+        </a> \
+        " + question.subject + " \
+      </h4> \
+      <blockquote> \
+        <p>" + question.content + "</p> \
+        <small> " + question.student  + "</small> \
+      </blockquote> \
+    </li>";
+    $("#new-questions").prepend(q);
     // if asked list greater then set #
     // remove older questions
+    if ($("#new-questions li") > $("#max_new_question_count").val()) {
+        $("#new-questions li").pop();
+    }
 }

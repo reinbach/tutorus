@@ -2,6 +2,7 @@ import json
 import logging
 
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseNotFound
 
 from classroom.models import ClassRoom
@@ -38,9 +39,13 @@ def ask_question(request, classroom):
                 "message": {
                     "type": "new_question",
                     "question": {
+                        "pk": question.pk,
                         "subject": question.subject,
-                        'content': question.content,
-                        'student': question.student.username
+                        "content": question.content,
+                        "student": question.student.username,
+                        "up_vote_url": reverse(
+                            "question_up_vote", args=[question.pk]
+                        ),
                     }
                 }
             })
