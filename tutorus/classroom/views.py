@@ -6,6 +6,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
+from questions.forms import AskQuestionForm
+
 from .models import ClassRoom
 from .forms import ClassRoomForm
 
@@ -41,7 +43,7 @@ def create_classroom(request):
 
     context = {'form':form}
     return render(request, 'classroom/create.html', context)
-    
+
 @login_required
 @tutor_only
 def edit_classroom(request, classroom):
@@ -90,11 +92,12 @@ def class_take(request, classroom_id):
     context = dict(
         classroom=classroom
     )
-    #test
-    log.info(request.user)
     if classroom.is_tutor(request.user):
         context.update(tutor=True)
         return render(request, "classroom/take.html", context)
+    context.update(
+        question_form=AskQuestionForm()
+    )
     return render(request, "classroom/take_student.html", context)
 
 def home(request):
