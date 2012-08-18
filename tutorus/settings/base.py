@@ -105,6 +105,7 @@ PROJECT_APPS = (
     'core',
     'questions',
     'classroom',
+    'step',
 )
 
 INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS
