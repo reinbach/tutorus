@@ -45,7 +45,8 @@
         <div class="tab-content">
           {% for step in classroom.steps %}
             <div class="tab-pane{% if forloop.first %} active{%endif %}" id="step{{step.pk}}">
-                <a class='btn btn-primary btn-mini' href="{% url step_edit classroom.pk step.pk %}">Edit Step</a>
+                <a class='btn btn-primary btn-mini' href="{% url step_edit classroom.pk step.pk %}"><i class="icon-pencil icon-white"></i> Edit Step</a>
+                <a class='btn btn-danger btn-mini' href="{% url step_delete classroom.pk step.pk %}"><i class="icon-trash icon-white"></i> Delete Step</a>
                 <div class="well" style="padding: 8px 0; height: 450px;">
                  <p>{{step.content}}</p>
                 </div>
