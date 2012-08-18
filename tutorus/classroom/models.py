@@ -2,6 +2,7 @@ import logging
 
 from django.conf import settings
 from django.db import models
+from django.db.models import Count
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 
@@ -36,6 +37,11 @@ class ClassRoom(TimeStampedModel):
         return False
 
     def latest_unanswered_questions(self, user=None):
+        """Get list of new questions that have not been answered
+
+        Also if we know the user, then exclude those questions
+        that have been voted by the user already
+        """
         latest_list = self.question_set.filter(
             status=question_constants.ASKED
         )
@@ -52,3 +58,15 @@ class ClassRoom(TimeStampedModel):
             )
 
         return latest_list[:settings.LATEST_QUESTIONS_COUNT]
+
+    def top_questions(self):
+        """Get list of top questions for the classroom
+
+        Top is determined by the vote count for the question
+        """
+        from questions.models import QuestionVotes
+        top_list = QuestionVotes.objects.filter(
+            question__classroom=self
+        ).annotate(num_votes=Count("question")).order_by("num_votes")
+        top_list = [x.question for x in top_list]
+        return top_list[:settings.TOP_QUESTIONS_COUNT]
