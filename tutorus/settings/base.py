@@ -90,6 +90,7 @@ PREREQ_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'south',
+    'core',
 )
 
 PROJECT_APPS = (
