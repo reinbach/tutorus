@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load classroom_tags %}
 
 {% block title %}{{ classroom.name }} {% trans "Class in Session" %}{% endblock title %}
 
@@ -98,22 +99,7 @@
             </div>
             <div id="class-new" class="accordion-body collapse in">
               <div class="accordion-inner">
-                <ul class="unstyled">
-                  {% for question in classroom.latest_unanswered_questions %}
-                    <li id="question-{{ question.pk }}">
-                      <h4>
-                        <a href="{% url question_up_vote question.pk %}" class="up_vote">
-                          <span class="label label-success"><i class="icon-arrow-up"></i></span>
-                        </a>
-                        {{ question.subject }}
-                      </h4>
-                      <blockquote>
-                        <p>{{ question.content }}</p>
-                        <small> {{ question.student.username }}</small>
-                      </blockquote>
-                    </li>
-                  {% endfor %}
-                </ul>
+                {% latest_questions classroom user %}
               </div>
             </div>
           </div>
