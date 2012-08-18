@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section id="classroom">
+    <div class="page-header">
+      <h1>Classrooms <small>a myriad of opportunities to learn something new</small></h1>
+    </div>
+    <div class="row">
+      {% for classroom in classrooms %}
+        <div class="span4">
+          <h2>{{ classroom.label }}</h2>
+          <p>{{ classroom.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock content %}
