@@ -1,13 +1,7 @@
 from django.db import models
 
-ASKED = 'asked'
-ANSWERED = 'answered'
-DELETED = 'deleted'
-QUESTION_CHOICES = (
-    (ASKED, 'asked'),
-    (ANSWERED, 'answered'),
-    (DELETED, 'deleted'),
-)
+from questions import constants
+
 
 class Question(models.Model):
     """
@@ -25,7 +19,7 @@ class Question(models.Model):
     subject = models.CharField(max_length=50, blank=False, null=False)
     content = models.TextField(blank=True, null=True, default="")
     status = models.CharField(max_length=10,
-                              choices=QUESTION_CHOICES,
-                              default=ASKED)
+                              choices=constants.QUESTION_CHOICES,
+                              default=constants.ASKED)
 
     # class = models.ForeignKey(Class)
