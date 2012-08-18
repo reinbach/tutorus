@@ -1,9 +1,9 @@
-tutorus
+TutorUs
 =======
 
-My entry for the Django Dash 2012 competition
+Team FryMe's entry in the Django Dash 2012 competition
 
 Setup/Installation
 ==================
 
-pip install -r requirements.conf
+pip install -r requirements.txt
