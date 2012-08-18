@@ -21,7 +21,7 @@
     <div class="container">
       <a class="brand" href="/">TutorUs</a>
       <ul class="nav pull-right">
-            <li><a href="#"><span id="conn_status" class="label">Not Connected</span></a></li>
+        <li><a href="#"><span id="conn_status" class="label">Not Connected</span></a></li>
           {% if user.is_authenticated %}
               <li><a href="{% url userena_profile_list %}"><span>{% trans 'All profiles' %}</span></a></li>
               <li><a href="{% url userena_umessages_list %}"><span>{% trans 'Messages' %}</span></a></li>
