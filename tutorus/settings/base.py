@@ -152,13 +152,13 @@ AUTHENTICATION_BACKENDS = (
 )
 
 #TODO change to real one later on.
-EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Settings used by Userena
 LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
 LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
 AUTH_PROFILE_MODULE = 'user.Profile'
-USERENA_DISABLE_PROFILE_LIST = True
+#USERENA_DISABLE_PROFILE_LIST = True
 USERENA_MUGSHOT_SIZE = 140
 ANONYMOUS_USER_ID=-1

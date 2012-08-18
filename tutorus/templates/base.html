@@ -1,3 +1,4 @@
+{% load i18n static %}
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
@@ -17,12 +18,22 @@
       <a class="brand" href="/">TutorUs</a>
       <ul class="nav pull-right">
             <li><a href="#"><span id="conn_status" class="label">Not Connected</span></a></li>
+          {% if user.is_authenticated %}
+              <li><a href="{% url userena_profile_list %}"><span>{% trans 'All profiles' %}</span></a></li>
+              <li><a href="{% url userena_umessages_list %}"><span>{% trans 'Messages' %}</span></a></li>
+              <li><a href="{% url userena_profile_detail user.username %}"><span>{% trans 'Account' %} ({{ user.username }})</span></a></li>
+              <li><a href="{% url userena_signout %}"><span>{% trans 'Signout' %}</span></a></li>
+          {% else %}
+              <li><a href="{% url userena_signin %}"><span>{% trans 'Signin' %}</span></a></li>
+              <li><a href="{% url userena_signup %}"><span>{% trans 'Signup' %}</span></a></li>
+          {% endif %}
       </ul>
     </div>
       </div>
     </div>
     <div class="container">
-        
+
+          
         <!-- Messages just putting here for now, need better place -->
       {% if messages %}
       <ul class="messages">
@@ -36,7 +47,7 @@
       {% block content %}{% endblock content %}
       <hr>
       <footer>
-        <p>Fried up by <a href="">Ken Cochrane</a>, <a href="">John Costa</a>, and <a href="">Greg Reinbach</a></p>
+        <p>Fried up by <a href="http://KenCochrane.net">Ken Cochrane</a>, <a href="">John Costa</a>, and <a href="">Greg Reinbach</a></p>
       </footer>
     </div>
   </body>
