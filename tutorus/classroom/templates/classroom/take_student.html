@@ -29,8 +29,21 @@
                }
              }
            });
-       });
-       return false;
+           return false;
+        });
+
+        $(".up_vote").on("click", function(event) {
+          event.preventDefault();
+          var question = $(this);
+          $.ajax({
+             type: "GET",
+             url: $(this).attr("href"),
+             success: function(data) {
+               $("question_" + data.success).hide();
+             }
+          });
+          return false;
+        });
 
       });
     </script>
@@ -89,7 +102,7 @@
                   {% for question in classroom.latest_unanswered_questions %}
                     <li id="question-{{ question.pk }}">
                       <h4>
-                        <a href="#">
+                        <a href="{% url question_up_vote question.pk %}" class="up_vote">
                           <span class="label label-success"><i class="icon-arrow-up"></i></span>
                         </a>
                         {{ question.subject }}
