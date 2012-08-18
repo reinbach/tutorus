@@ -90,20 +90,17 @@ PREREQ_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
     'django.contrib.admin',
     'userena',
     'userena.contrib.umessages',
     'guardian',
     'easy_thumbnails',
-    'user',
-=======
     'south',
 )
 
 PROJECT_APPS = (
     'scratchpad',
->>>>>>> 7f70bde4cb589e84df2cbb83732b422449c588b2
+    'user',
     'core',
 )
 
