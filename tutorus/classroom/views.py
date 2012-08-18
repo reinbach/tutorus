@@ -41,6 +41,30 @@ def create_classroom(request):
 
     context = {'form':form}
     return render(request, 'classroom/create.html', context)
+    
+@login_required
+@tutor_only
+def edit_classroom(request, classroom):
+    """
+    Edit ClassRoom
+    """
+    if request.method == 'POST':
+        form = ClassRoomForm(request.POST, instance=classroom)
+        if form.is_valid():
+            try:
+                classroom = form.save(request.user)
+                return HttpResponseRedirect(reverse('class_create_step', args=[classroom.pk]))
+            except Exception as e:
+                #TODO: fix me.
+                print("ERROR {0}".format(e))
+        else:
+            #TODO do something better with errors
+            print form
+    else:
+        form = ClassRoomForm(instance=classroom)
+
+    context = {'form':form}
+    return render(request, 'classroom/create.html', context)
 
 @login_required
 @tutor_only
@@ -57,12 +81,12 @@ def class_activate(request, classroom):
     return render(request, 'classroom/steps.html', context)
 
 @login_required
-@tutor_only
-def class_take(request, classroom):
+def class_take(request, classroom_id):
     """Take the class
 
     Different experience based on whether tutor or student
     """
+    classroom = ClassRoom.objects.get(pk=classroom_id)
     context = dict(
         classroom=classroom
     )

@@ -10,7 +10,8 @@ class ClassRoomForm(ModelForm):
 
         classroom= super(ClassRoomForm, self).save(commit=False)
         classroom.tutor = user
-        classroom.status = ClassRoom.STATUS.draft
+        if not classroom.status:
+            classroom.status = ClassRoom.STATUS.draft
         classroom.save()
 
         return classroom

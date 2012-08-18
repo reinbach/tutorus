@@ -57,3 +57,15 @@ def edit(request, classroom_id, step_id):
 
     context = {'form':form, 'classroom': classroom}
     return render(request, 'step/add.html', context)
+    
+    
+@login_required
+def delete(request, classroom_id, step_id):
+    """
+    delete Step from classroom
+    """
+    #TODO do a 404 check here.
+    classroom = ClassRoom.objects.get(pk=classroom_id)
+    step = Step.objects.filter(pk=step_id).delete()
+
+    return HttpResponseRedirect(reverse('class_create_step', args=[classroom.pk]))
