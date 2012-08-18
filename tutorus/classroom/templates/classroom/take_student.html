@@ -84,7 +84,19 @@
               </a>
             </div>
             <div id="class-new" class="accordion-body collapse in">
-              <div class="accordion-inner">Line of New Questions</div>
+              <div class="accordion-inner">
+                <ul class="unstyled">
+                  {% for question in classroom.latest_unanswered_questions %}
+                    <li>
+                      <h4>{{ question.subject }}</h4>
+                      <blockquote>
+                        <p>{{ question.content }}</p>
+                        <small> {{ question.student.username }}</small>
+                      </blockquote>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
             </div>
           </div>
           <div class="accordion-group">
