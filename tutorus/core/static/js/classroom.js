@@ -89,7 +89,7 @@ function addQuestion(question) {
     $("#new-questions").prepend(q);
     // if asked list greater then set #
     // remove older questions
-    if ($("#new-questions li") > $("#max_new_question_count").val()) {
-        $("#new-questions li").pop();
+    if ($("#new-questions li").length > parseInt($("#max_new_question_count").text())) {
+        $("#new-questions li:last").remove();
     }
 }
