@@ -90,11 +90,11 @@ PREREQ_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'south',
-    'core',
 )
 
 PROJECT_APPS = (
     'scratchpad',
+    'core',
 )
 
 INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS
