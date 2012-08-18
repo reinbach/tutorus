@@ -35,6 +35,7 @@ def ask_question(request, classroom):
             pubnub.publish({
                 "channel": "classroom_{0}".format(classroom.pk),
                 "message": {
+                    "type": "new_question",
                     "question": {
                         "subject": question.subject,
                         'content': question.content,
