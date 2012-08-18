@@ -11,6 +11,8 @@ from questions.forms import AskQuestionForm
 
 from .models import ClassRoom
 from .forms import ClassRoomForm
+from scratchpad.forms import ScratchpadForm
+from scratchpad.models import Scratchpad
 
 log = logging.getLogger(__name__)
 
@@ -90,9 +92,13 @@ def class_take(request, classroom_id):
     Different experience based on whether tutor or student
     """
     classroom = ClassRoom.objects.get(pk=classroom_id)
+    scratchpad, r = Scratchpad.objects.get_or_create(classroom=classroom)
+
+    scratchpad_form = ScratchpadForm(instance=scratchpad)
     context = dict(
         classroom=classroom,
         user=request.user,
+        scratchpad_form=scratchpad_form,
         latest_questions_count=settings.LATEST_QUESTIONS_COUNT,
     )
     if classroom.is_tutor(request.user):
