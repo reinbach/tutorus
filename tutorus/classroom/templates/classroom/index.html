@@ -10,7 +10,7 @@
         <div class="span4">
           <h2>{{ classroom.name }} <a href='{% url class_create_step classroom.pk %}'><i class="icon-pencil"></i></a></h2>
           <p>{{ classroom.description }}</p>
-          <p>[{{classroom.status}}]</p>
+          <p>[{{ classroom.status }}]</p>
         </div>
       {% endfor %}
     </div>
