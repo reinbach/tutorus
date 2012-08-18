@@ -39,7 +39,7 @@ MEDIA_ROOT = ''
 MEDIA_URL = ''
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.realpath(os.path.join(PROJECT_ROOT, "static"))
+STATIC_ROOT = os.path.join(PROJECT_ROOT, "static")
 
 # Additional locations of static files
 STATICFILES_DIRS = (
