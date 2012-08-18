@@ -6,7 +6,7 @@ from questions.models import Question
 
 class QuestionsFixture(TestCase):
 
-    subject = expected_subject = "What is the meaining of life?"
+    subject = expected_subject = "What is the meaning of life?"
 
     def setUp(self):
         self.question = Question(

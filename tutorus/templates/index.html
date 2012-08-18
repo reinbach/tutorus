@@ -4,18 +4,19 @@
   <div class="hero-unit">
     <h1>TutorUs</h1>
     <p>Teach or be taught, learn something new, help educate the world!</p>
-    <p><a class="btn btn-primary btn-large">View Classes »</a></p>
+    <p><a class="btn btn-primary btn-large" href="{% url classroom_home %}">View Classes »</a></p>
   </div>
   <div class="row">
     <div class="span4">
       <h2>Create Your Own Classes</h2>
       <p>You have something to teach, go ahead and create your own classes. Let students sign up and help to educate the world.</p>
-      <p><a class="btn" href='{% url create_classroom %}'>Create Class »</a></p>
+      <p><a class="btn" href='{% url classroom_create %}'>Create Class »</a></p>
+
     </div>
     <div class="span4">
       <h2>Learn Something New</h2>
       <p>Want to learn something new, look for a class that interests you. Always good to be improving yourself.</p>
-      <p><a class="btn">Find Class »</a></p>
+      <p><a class="btn" href="{% url classroom_home %}">Find Class »</a></p>
     </div>
     <div class="span4">
       <h2>Suggest Classes</h2>

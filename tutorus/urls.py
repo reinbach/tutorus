@@ -3,8 +3,10 @@ from django.conf import settings
 
 from user.forms import SignupFormExtra
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^$', 'core.views.home', name='home'),
+    (r'^classroom/', include('classroom.urls')),
     # Override the signup form with our own, which includes a first and last name.
     (r'^accounts/signup/$', 'userena.views.signup', {'signup_form': SignupFormExtra}),
     (r'^accounts/', include('userena.urls')),

@@ -31,3 +31,9 @@ def class_create_step(request, classroom_id):
     classroom = ClassRoom.objects.get(pk=classroom_id)
     context = {'classroom':classroom}
     return render(request, 'classroom/steps.html', context)
+
+def home(request):
+    context = dict(
+        classrooms=ClassRoom.objects.filter(status='active')
+    )
+    return render(request, "classroom/index.html", context)
