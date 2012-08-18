@@ -1,5 +1,5 @@
 try:
     from .currentenv import *
 except ImportError:
-    # Let's not harm people for using explicit settings
-    pass
+    # going to assume that we are in prod and make use of prod settings
+    from prod import *
