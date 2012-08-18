@@ -21,6 +21,10 @@ class Question(models.Model):
     student = models.ForeignKey(User, verbose_name=_('student'))
     created = models.DateTimeField(auto_now_add=True)
 
+    def vote_count(self):
+        """Get a count of votes"""
+        return QuestionVotes.objects.filter(question=self).count()
+
 
 class QuestionVotes(models.Model):
     question = models.ForeignKey(Question)
