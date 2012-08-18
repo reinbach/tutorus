@@ -1,39 +1,46 @@
-function channel_subscribe(channel) {
+function channel_subscribe(channel, username) {
     pubnub = PUBNUB.init({
         publish_key: $("#pubnub").attr("pub-key"),
         subscribe_key: $("#pubnub").attr("sub-key"),
         ssl: false,
     });
 
-    // LISTEN FOR MESSAGES
     pubnub.subscribe({
-        channel    : channel,      // CONNECT TO THIS CHANNEL.
-        restore    : false,              // STAY CONNECTED, EVEN WHEN BROWSER IS CLOSED
-                                         // OR WHEN PAGE CHANGES.
+        channel: channel,
+        restore: false,
 
-        callback   : function(message) { // RECEIVED A MESSAGE.
-            alert(message)
+        callback: function(message) {
+            // determine which type of message
+            // and handle accordingly
+//test
+console.log(message);
+            if (message.type == "student_connected") {
+                console.log(message.name + " connected");
+            } else {
+                console.log(message.type);
+            }
         },
 
-        disconnect : function() {        // LOST CONNECTION.
-            alert(
-                "Connection Lost." +
-                "Will auto-reconnect when Online."
-            )
+        disconnect: function() {
+            $('#conn_status').html('<b>Closed</b>');
+	    $('#conn_status').attr("class", "label label-warning")
         },
 
-        reconnect  : function() {        // CONNECTION RESTORED.
-            alert("And we're Back!")
+        reconnect: function() {
+            $('#conn_status').html('<b>Connected</b>');
+	    $('#conn_status').attr("class", "label label-success")
         },
 
-        connect    : function() {        // CONNECTION ESTABLISHED.
+        connect: function() {
+            $('#conn_status').html('<b>Connected</b>');
+	    $('#conn_status').attr("class", "label label-success")
 
-            pubnub.publish({             // SEND A MESSAGE.
-                channel : channel,
-                message : "Hi from PubNub."
+            pubnub.publish({
+                channel: channel,
+                message: {"type": "student_connected", "name": username}
             })
-
         }
-    })
+    });
 
+    return pubnub;
 }
