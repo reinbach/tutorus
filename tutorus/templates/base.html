@@ -13,15 +13,26 @@
   <body>
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
-	<div class="container">
-	  <a class="brand" href="/">TutorUs</a>
-	  <ul class="nav pull-right">
+    <div class="container">
+      <a class="brand" href="/">TutorUs</a>
+      <ul class="nav pull-right">
             <li><a href="#"><span id="conn_status" class="label">Not Connected</span></a></li>
-	  </ul>
-	</div>
+      </ul>
+    </div>
       </div>
     </div>
     <div class="container">
+        
+        <!-- Messages just putting here for now, need better place -->
+      {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+      </ul>
+       <!--  End message just putting here for now, need better place -->
+      {% endif %}
+      {% block content_title %}{% endblock %}
       {% block content %}{% endblock content %}
     </div>
   </body>
