@@ -1,5 +1,7 @@
 *.log
 *.pot
 *.pyc
+*.idea
+coverage
 local_settings.py
 .DS_Store

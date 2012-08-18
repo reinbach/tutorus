@@ -11,4 +11,8 @@ easy-thumbnails
 django-guardian
 
 # Django-south for migrations
-South
+South==0.7.6
+
+coverage==3.5.2
+django-coverage==1.2.2
+
