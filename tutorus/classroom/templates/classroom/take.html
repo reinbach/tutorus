@@ -1,8 +1,35 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Class in Session" %}{% endblock title %}
+{% block title %}{{ classroom.name }} {% trans "Class in Session" %}{% endblock title %}
 
 {% block content %}
-    
+  <section class="class">
+    <div class="page-header">
+      <h1>{{ classroom.name }}</h1>
+    </div>
+    <div class="row">
+      <div class="span8">
+        <div class="tabbable tabs-left">
+          <ul class="nav nav-tabs">
+            <li class="nav-header">Steps</li>
+              {% for step in classroom.steps %}
+                <li{% if forloop.first %} class='active'{%endif %}>
+                  <a href="#step{{step.pk}}" data-toggle="tab">{{step.name}}</a>
+                </li>
+              {% endfor %}
+          </ul>
+          <div class="tab-content">
+            {% for step in classroom.steps %}
+              <div class="tab-pane{% if forloop.first %} active{%endif %}" id="step{{step.pk}}">
+                <div class="well" style="padding: 8px 0; height: 450px;">
+                 <p>{{ step.content }}</p>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock content %}

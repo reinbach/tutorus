@@ -63,7 +63,9 @@ def class_take(request, classroom):
 
     Different experience based on whether tutor or student
     """
-    context = dict()
+    context = dict(
+        classroom=classroom
+    )
     if classroom.is_tutor(request.user):
         context.update(tutor=True)
     return render(request, "classroom/take.html", context)
