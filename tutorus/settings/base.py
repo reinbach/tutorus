@@ -102,6 +102,7 @@ PROJECT_APPS = (
     'scratchpad',
     'user',
     'core',
+    'questions',
 )
 
 INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS
