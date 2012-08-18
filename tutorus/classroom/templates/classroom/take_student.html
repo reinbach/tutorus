@@ -87,8 +87,13 @@
               <div class="accordion-inner">
                 <ul class="unstyled">
                   {% for question in classroom.latest_unanswered_questions %}
-                    <li>
-                      <h4>{{ question.subject }}</h4>
+                    <li id="question-{{ question.pk }}">
+                      <h4>
+                        <a href="#">
+                          <span class="label label-success"><i class="icon-arrow-up"></i></span>
+                        </a>
+                        {{ question.subject }}
+                      </h4>
                       <blockquote>
                         <p>{{ question.content }}</p>
                         <small> {{ question.student.username }}</small>
