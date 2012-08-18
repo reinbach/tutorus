@@ -1,6 +1,18 @@
 Django==1.4.1
 psycopg2==2.4.5
+
+# Imaging library needed for easy_thumbnails
+http://effbot.org/downloads/Imaging-1.1.7.tar.gz
+
+# Thumbails used for mugshots
+easy-thumbnails
+
+# Django-guardian used for privacy settings
+django-guardian
+
+# Django-south for migrations
 South==0.7.6
 
 coverage==3.5.2
 django-coverage==1.2.2
+django-userena==1.1.2
