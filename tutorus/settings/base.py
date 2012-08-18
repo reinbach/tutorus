@@ -90,14 +90,13 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
-    'userena', 
+    'django.contrib.admin',
+    'userena',
+    'userena.contrib.umessages',
     'guardian',
     'easy_thumbnails',
-    'user'
+    'user',
+    'core',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -143,3 +142,5 @@ LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
 LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
 AUTH_PROFILE_MODULE = 'user.Profile'
+USERENA_DISABLE_PROFILE_LIST = True
+USERENA_MUGSHOT_SIZE = 140
