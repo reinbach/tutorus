@@ -71,6 +71,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'userena.middleware.UserenaLocaleMiddleware',
 )
 
 ROOT_URLCONF = 'urls'
@@ -89,11 +90,17 @@ PREREQ_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admin',
+    'userena',
+    'userena.contrib.umessages',
+    'guardian',
+    'easy_thumbnails',
     'south',
 )
 
 PROJECT_APPS = (
     'scratchpad',
+    'user',
     'core',
     'questions',
 )
@@ -138,3 +145,21 @@ LOGGING = {
         },
     }
 }
+
+AUTHENTICATION_BACKENDS = (
+    'userena.backends.UserenaAuthenticationBackend',
+    'guardian.backends.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+#TODO change to real one later on.
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Settings used by Userena
+LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
+LOGIN_URL = '/accounts/signin/'
+LOGOUT_URL = '/accounts/signout/'
+AUTH_PROFILE_MODULE = 'user.Profile'
+#USERENA_DISABLE_PROFILE_LIST = True
+USERENA_MUGSHOT_SIZE = 140
+ANONYMOUS_USER_ID=-1
