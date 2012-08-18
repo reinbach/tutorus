@@ -8,6 +8,9 @@ from questions import constants
 
 class Question(models.Model):
 
+    class Meta:
+        ordering = ("-created",)
+
     subject = models.CharField(_('Subject'), max_length=50, blank=False,
                                null=False)
     content = models.TextField(_('Content'), blank=True, null=True, default="")
@@ -16,3 +19,4 @@ class Question(models.Model):
                               default=constants.ASKED)
     classroom = models.ForeignKey(ClassRoom, blank=None, null=True)
     student = models.ForeignKey(User, verbose_name=_('student'))
+    created = models.DateTimeField(auto_now_add=True)
