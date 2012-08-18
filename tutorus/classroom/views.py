@@ -90,7 +90,8 @@ def class_take(request, classroom_id):
     """
     classroom = ClassRoom.objects.get(pk=classroom_id)
     context = dict(
-        classroom=classroom
+        classroom=classroom,
+        user=request.user,
     )
     if classroom.is_tutor(request.user):
         context.update(tutor=True)

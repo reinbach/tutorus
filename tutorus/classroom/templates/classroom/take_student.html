@@ -7,7 +7,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/classroom.js"></script>
     <script type="text/javascript">
       $(function() {
-        channel_subscribe("classroom_{{ classroom.pk }}");
+        pubnub = channel_subscribe("classroom_{{ classroom.pk }}", "{{ user.username }}");
 
         $(".collapse").collapse();
 
