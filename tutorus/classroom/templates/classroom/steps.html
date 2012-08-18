@@ -31,8 +31,15 @@
             <li>No Steps Available</li>
           {% endfor %}
           <li class="nav-header">Actions</li>
-          <li><a href="{% url step_add classroom.pk %}">Add Step</a></li>
-          <li><a href="{% url class_activate classroom.pk %}">Activate Class</a></li>
+          <li><a href="{% url step_add classroom.pk %}"><i class="icon-plus"></i> Add Step</a></li>
+          <li><a href="{% url class_edit classroom.pk %}"><i class="icon-pencil"></i> Edit Class</a></li>
+          {% if not classroom.status == 'active' %}
+            <li><a href="{% url class_activate classroom.pk %}"><i class='icon-ok'></i> Activate Class</a></li>
+          {% endif %}
+          
+          <li class="nav-header">Info</li>
+          <li><i class="icon-user"></i> {{classroom.tutor.username}}</li>
+          <li><i class="icon-exclamation-sign"></i> {{classroom.status}}</li>
         </ul>
 
         <div class="tab-content">
