@@ -85,11 +85,14 @@
             </div>
             <div id="class-new" class="accordion-body collapse in">
               <div class="accordion-inner">
-                <ul>
+                <ul class="unstyled">
                   {% for question in classroom.latest_unanswered_questions %}
                     <li>
                       <h4>{{ question.subject }}</h4>
-                      <p>{{ question.content }}</p>
+                      <blockquote>
+                        <p>{{ question.content }}</p>
+                        <small> {{ question.student.username }}</small>
+                      </blockquote>
                     </li>
                   {% endfor %}
                 </ul>
