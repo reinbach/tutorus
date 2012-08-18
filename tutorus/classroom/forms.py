@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from .models import ClassRoom
 
+
 class ClassRoomForm(ModelForm):
     class Meta:
         model = ClassRoom

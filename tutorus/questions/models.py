@@ -12,7 +12,7 @@ class Question(models.Model):
         ordering = ("-created",)
 
     subject = models.CharField(_('Subject'), max_length=50, blank=False,
-                               null=False)
+                               null=False, default="")
     content = models.TextField(_('Content'), blank=True, null=True, default="")
     status = models.CharField(max_length=10,
                               choices=constants.QUESTION_CHOICES,
