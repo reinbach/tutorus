@@ -92,9 +92,14 @@ def class_take(request, classroom_id):
     Different experience based on whether tutor or student
     """
     classroom = ClassRoom.objects.get(pk=classroom_id)
-    scratchpad, r = Scratchpad.objects.get_or_create(classroom=classroom)
+    if request.method == 'POST':
+        scratchpad_form = ScratchpadForm(request.POST)
+        if scratchpad_form.is_valid():
+            scratchpad_form.save(classroom)
+    else:
+        scratchpad, r = Scratchpad.objects.get_or_create(classroom=classroom)
+        scratchpad_form = ScratchpadForm(instance=scratchpad)
 
-    scratchpad_form = ScratchpadForm(instance=scratchpad)
     context = dict(
         classroom=classroom,
         user=request.user,
