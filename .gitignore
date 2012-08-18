@@ -5,3 +5,4 @@
 coverage
 local_settings.py
 .DS_Store
+tutorus/settings/currentenv.py
