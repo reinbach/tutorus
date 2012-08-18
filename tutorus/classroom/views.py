@@ -34,6 +34,6 @@ def class_create_step(request, classroom_id):
 
 def home(request):
     context = dict(
-        classrooms=ClassRoom.objects.filter(status='active')
+        classrooms=ClassRoom.objects.all() # so we get something change later filter(status='active')
     )
     return render(request, "classroom/index.html", context)
