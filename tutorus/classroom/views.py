@@ -81,12 +81,12 @@ def class_activate(request, classroom):
     return render(request, 'classroom/steps.html', context)
 
 @login_required
-@tutor_only
-def class_take(request, classroom):
+def class_take(request, classroom_id):
     """Take the class
 
     Different experience based on whether tutor or student
     """
+    classroom = ClassRoom.objects.get(pk=classroom_id)
     context = dict(
         classroom=classroom
     )
