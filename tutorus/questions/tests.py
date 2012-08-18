@@ -1,6 +1,7 @@
 from django.test import TestCase
 
-from questions.models import Question, ASKED
+from questions import constants
+from questions.models import Question
 
 
 class QuestionsFixture(TestCase):
@@ -14,5 +15,5 @@ class QuestionsFixture(TestCase):
 
     def test_it_exists(self):
         self.assertEquals(self.question.subject, self.expected_subject)
-        self.assertEquals(self.question.status, ASKED)
+        self.assertEquals(self.question.status, constants.ASKED)
         self.assertEquals(self.question.content, "")
