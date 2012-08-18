@@ -4,4 +4,4 @@ python:
 # command to install dependencies
 install:
  - pip install -r requirements.txt --use-mirrors
-script: python tutorus/manage.py test
+script: python tutorus/manage.py test --settings=settings.test
