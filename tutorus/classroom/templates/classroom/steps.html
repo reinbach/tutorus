@@ -3,6 +3,13 @@
 
 {% block title %}{% trans "Create Class" %}{% endblock title %}
 
+{% block page-js %}
+    <script type="text/javascript">
+      $(function() {
+        $("#stepModal").modal("show");
+      });
+    </script>
+{% endblock page-js %}
 
 {% block content %}
 <form action="" enctype="multipart/form-data" method="post">
@@ -10,18 +17,21 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span12">
-    
+
        <div class="tabbable tabs-left">
-           
+
         <ul class="nav nav-tabs">
             <li class="nav-header">Steps</li>
           {% for step in classroom.steps %}
-            <li{% if forloop.first %} class='active'{%endif %}><a href="#step{{step.pk}}" data-toggle="tab">{{step.name}}</a></li>
+            <li{% if forloop.first %} class='active'{%endif %}>
+              <a href="#step{{step.pk}}" data-toggle="tab">{{step.name}}</a>
+            </li>
           {% empty %}
             <li>No Steps Available</li>
           {% endfor %}
           <li class="nav-header">Actions</li>
           <li><a href="{% url step_add classroom.pk %}">Add Step</a></li>
+          <li><a href="{% url class_activate classroom.pk %}">Activate Class</a></li>
         </ul>
 
         <div class="tab-content">
@@ -31,14 +41,29 @@
                  <p>{{step.content}}</p>
                  <a class='btn btn-primary' href="{% url step_edit classroom.pk step.pk %}">Edit Step</a>
                 </div>
-                
             </div>
           {% empty %}
-            <h3> &lt;---- Add a Step</h3>
-          {% endfor %} 
+            <div id="stepModal" class="modal hide fade">
+              <div class="modal-header">
+                <button class="close" data-dismiss="modal" type="button">x</button>
+                <h3>First step is to add a step</h3>
+              </div>
+              <div class="modal-body">
+                <p>Your class is made up of steps, you can have as many steps as you like.</p>
+
+                <p>At least one step is needed for a class.</p>
+
+                <p>Each step has content and you move through these steps as you are teaching the class.</p>
+              </div>
+              <div class="modal-footer">
+                <a class="btn" data-dismiss="modal" href="#">Close</a>
+                <a class="btn btn-primary" href="{% url step_add classroom.pk %}">Add Step</a>
+              </div>
+            </div>
+          {% endfor %}
           </div>
-       </div> 
-        
+       </div>
+
     </div>
   </div>
 </div>
