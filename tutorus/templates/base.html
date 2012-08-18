@@ -13,7 +13,6 @@
     <style type="text/css" media="screen">
       body { padding-top: 60px; }
     </style>
-    {% block page-js %}{% endblock page-js %}
     {% block page-css %}{% endblock page-css %}
   </head>
   <body>
@@ -54,5 +53,6 @@
       </footer>
     </div>
     <div pub-key="pub-6eda272b-1ea0-4985-95ba-d4483e8ac8bd" sub-key="sub-cbb8b8b3-e93c-11e1-ae3c-858473decdae" ssl="off" origin="pubsub.pubnub.com" id="pubnub"></div>
+    {% block page-js %}{% endblock page-js %}
   </body>
 </html>
