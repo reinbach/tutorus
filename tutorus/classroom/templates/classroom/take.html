@@ -131,7 +131,9 @@
     <div class="row">
       <div class="span8">
         <h3>Scratchpad</h3>
-
+         <form action="{% url class_take classroom.id %}" method="POST">
+            {{ scratchpad_form.as_p }}
+         </form>
       </div>
       <div class="span4">
         <h3>Controls</h3>

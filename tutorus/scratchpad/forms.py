@@ -2,10 +2,21 @@
 
 """
 
-    
-    ~~~~~~~~~~~~~~
+    scratchpad.forms
+    ~~~~~~~~~~~~~~~~
 
-    Short description of what's contained in the file
+    `forms` used for the scratchpads
 
 """
+from django import forms
+
+from scratchpad.models import Scratchpad
+
 __docformat__ = 'restructuredtext en'
+
+
+class ScratchpadForm(forms.ModelForm):
+
+    class Meta:
+        model = Scratchpad
+        exclude = ('classroom',)
