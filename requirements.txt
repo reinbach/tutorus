@@ -1,6 +1,9 @@
 Django==1.4.1
 psycopg2==2.4.5
+
+# needed to run on heroku
 dj-database-url==0.2.1
+gunicorn==0.14.6
 
 # Imaging library needed for easy_thumbnails
 http://effbot.org/downloads/Imaging-1.1.7.tar.gz
