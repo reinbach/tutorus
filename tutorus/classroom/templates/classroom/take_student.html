@@ -7,6 +7,24 @@
     <script type="text/javascript">
       $(function() {
         $(".collapse").collapse();
+
+        $("#ask_question_form").submit(function(event){
+           event.preventDefault();
+           var form = $(this);
+           $.ajax({
+             type: "POST",
+             url: "{% url question_ask classroom.pk %}",
+             data: $(this).serializeArray(),
+             success: function(data) {
+               var d = $.parseJSON(data);
+               //test
+               console.log(d);
+               form.reset();
+             }
+           });
+       });
+       return false;
+
       });
     </script>
 {% endblock page-js %}
@@ -69,7 +87,31 @@
               </a>
             </div>
             <div id="class-ask" class="accordion-body collapse in">
-              <div class="accordion-inner">Ask Questions</div>
+              <div class="accordion-inner">
+                <form method="post" id="ask_question_form" action="{% url question_ask classroom.pk %}">
+                  <fieldset>
+                    <div class="control-group">
+                      <label class="control-label" for="input01">Subject</label>
+                      <div class="controls">
+                        {{ question_form.subject }}
+                        <p class="help-block"></p>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label" for="input01">Question</label>
+                      <div class="controls">
+                        {{ question_form.content }}
+                        <p class="help-block"></p>
+                      </div>
+                    </div>
+                    <div class="form-actions">
+                      <button type="submit" class="btn btn-primary">Ask Question</button>
+                      <button type="reset" class="btn">Clear</button>
+                    </div>
+                  </fieldset>
+                  {% csrf_token %}
+                </form>
+              </div>
             </div>
           </div>
           <div class="accordion-group">
