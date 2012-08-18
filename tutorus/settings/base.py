@@ -96,6 +96,7 @@ PREREQ_APPS = (
     'guardian',
     'easy_thumbnails',
     'south',
+    'gunicorn',
 )
 
 PROJECT_APPS = (

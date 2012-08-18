@@ -1,0 +1,1 @@
+web: python tutorus/manage.py collectstatic --noinput; python manage.py run_gunicorn -w 3 -b 0.0.0.0:$PORT
