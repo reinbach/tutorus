@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Create Class" %}{% endblock title %}
+
+
+{% block content %}
+<form action="" enctype="multipart/form-data" method="post">
+    <h2>{{classroom.name}}</h2>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+    
+       <div class="tabbable tabs-left">
+           
+        <ul class="nav nav-tabs">
+            <li class="nav-header">Steps</li>
+          {% for step in classroom.steps %}
+            <li{% if forloop.first %} class='active'{%endif %}><a href="#step{{step.pk}}" data-toggle="tab">{{step.name}}</a></li>
+          {% empty %}
+            <li>No Steps Available</li>
+          {% endfor %}
+          <li class="nav-header">Actions</li>
+          <li><a href="{% url step_add classroom.pk %}">Add Step</a></li>
+        </ul>
+
+        <div class="tab-content">
+          {% for step in classroom.steps %}
+            <div class="tab-pane{% if forloop.first %} active{%endif %}" id="step{{step.pk}}">
+                <div class="well" style="padding: 8px 0; height: 450px;">
+                 <p>{{step.content}}</p>
+                 <a class='btn btn-primary' href="{% url step_edit classroom.pk step.pk %}">Edit Step</a>
+                </div>
+                
+            </div>
+          {% empty %}
+            <h3> &lt;---- Add a Step</h3>
+          {% endfor %} 
+          </div>
+       </div> 
+        
+    </div>
+  </div>
+</div>
+
+{% csrf_token %}
+</form>
+{% endblock %}

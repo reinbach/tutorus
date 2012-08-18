@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Add Step" %}{% endblock %}
+
+
+{% block content %}
+
+<form class="form-horizontal" action="" enctype="multipart/form-data" method="post">
+  <fieldset>
+    <legend>Add Step to {{classroom.name}}</legend>
+    <div class="control-group">
+      <label class="control-label" for="input01">Step Name</label>
+      <div class="controls">
+        {{form.name}}
+        <p class="help-block"></p>
+      </div>
+    </div>
+    
+    <div class="control-group">
+      <label class="control-label" for="input01">Content</label>
+      <div class="controls">
+        {{form.content}}
+        <p class="help-block"></p>
+      </div>
+    </div>
+    <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button class="btn">Cancel</button>
+    </div>
+  </fieldset>
+
+{% csrf_token %}
+</form>
+{% endblock %}

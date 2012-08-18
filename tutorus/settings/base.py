@@ -97,6 +97,7 @@ PREREQ_APPS = (
     'easy_thumbnails',
     'south',
     'gunicorn',
+    'django_extensions',
 )
 
 PROJECT_APPS = (

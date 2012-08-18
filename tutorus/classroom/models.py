@@ -13,4 +13,9 @@ class ClassRoom(TimeStampedModel):
     name =  models.CharField(_('name'), max_length=255, blank=True)
     tutor = models.ForeignKey(User, verbose_name=_('tutor'))
     description = models.TextField(blank=True, null=True, default="")
-    status = StatusField()
+    status = StatusField(default=STATUS.draft)
+    
+    
+    @property
+    def steps(self):
+        return self.step_set.all()

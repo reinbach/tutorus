@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Create Class" %}{% endblock %}
+
+
+{% block content %}
+
+<form class="form-horizontal" action="" enctype="multipart/form-data" method="post">
+  <fieldset>
+    <legend>Create a New Class</legend>
+    <div class="control-group">
+      <label class="control-label" for="input01">Class Name</label>
+      <div class="controls">
+        {{form.name}}
+        <p class="help-block"></p>
+      </div>
+    </div>
+    
+    <div class="control-group">
+      <label class="control-label" for="input01">Description</label>
+      <div class="controls">
+        {{form.description}}
+        <p class="help-block"></p>
+      </div>
+    </div>
+    <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <a class='btn' href='{% url home %}'>Cancel</a>
+    </div>
+  </fieldset>
+
+{% csrf_token %}
+</form>
+{% endblock %}

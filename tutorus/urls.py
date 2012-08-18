@@ -9,6 +9,8 @@ urlpatterns = patterns('',
     (r'^accounts/signup/$', 'userena.views.signup', {'signup_form': SignupFormExtra}),
     (r'^accounts/', include('userena.urls')),
     (r'^messages/', include('userena.contrib.umessages.urls')),
+    (r'^class/', include('classroom.urls')),
+    (r'^step/', include('step.urls')),
 )
 
 if settings.DEBUG:
