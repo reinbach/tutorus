@@ -8,7 +8,7 @@ from django.db import models
 class Migration(SchemaMigration):
 
     depends_on = (("classroom", "0001_initial"),)
-    
+
     def forwards(self, orm):
         # Adding field 'Scratchpad.classroom'
         db.add_column('scratchpad_scratchpad', 'classroom',
