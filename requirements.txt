@@ -17,6 +17,7 @@ django-guardian
 # Django-south for migrations
 South==0.7.6
 
+dingus==0.3.4
 coverage==3.5.2
 django-coverage==1.2.2
 django-userena==1.1.2
