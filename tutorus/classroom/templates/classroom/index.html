@@ -32,9 +32,11 @@
           <p>{{ classroom.description }}</p>
           {% if user.is_authenticated %}
             {% if classroom.is_active %}
-                <a class="btn btn-primary btn-small" href="{% url class_take classroom.pk %}">Enter Class</a>
+              <a class="btn btn-primary btn-small" href="{% url class_take classroom.pk %}">Enter Class</a>
             {% endif %}
-            <a class="btn btn-info btn-small interest" href="{% url class_interest classroom.pk %}">I'm Interested</a>
+            {% if classroom.pk not in interest_list %}
+              <a class="btn btn-info btn-small interest" href="{% url class_interest classroom.pk %}">I'm Interested</a>
+            {% endif %}
           {% endif %}
         </div>
       {% endfor %}

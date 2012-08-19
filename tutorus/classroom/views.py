@@ -174,4 +174,9 @@ def home(request):
     context = dict(
         classrooms=ClassRoom.objects.filter(status='active')
     )
+    if request.user.is_authenticated():
+        interest_list = ClassRoomStudentInterest.objects.values_list(
+            "classroom__pk"
+        ).filter(student=request.user)
+        context.update(interest_list=[x[0] for x in interest_list])
     return render(request, "classroom/index.html", context)
