@@ -107,7 +107,7 @@ def class_interest(request, classroom_id):
     if created:
         pubnub = get_pubnub_connection()
         pubnub.publish({
-            "channel": "tutor_{0}".format(classroom.tutor.pk),
+            "channel": "classes",
             "message": {
                 "type": "interest",
                 "classroom": classroom.pk,
