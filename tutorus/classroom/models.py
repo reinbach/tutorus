@@ -28,7 +28,8 @@ class ClassRoom(TimeStampedModel):
     status = StatusField(default=STATUS.draft)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify_uniquely(self.name, self.__class__)
+        if not self.slug:
+            self.slug = slugify_uniquely(self.name, self.__class__)
         super(ClassRoom, self).save(*args, **kwargs)
 
     @property

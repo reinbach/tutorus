@@ -22,4 +22,9 @@ urlpatterns = patterns(
         views.class_scratchpad,
         name='class_scratchpad'
     ),
+    url(
+        r'^(?P<classroom_id>\w+)/step/(?P<step_id>\w+)$',
+        views.class_step,
+        name='class_step'
+    ),
     url(r'^$', views.home, name='class_home'),)

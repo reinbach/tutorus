@@ -24,9 +24,9 @@
 
       <div class="span8">
         <div class="tabbable tabs-left">
-          <ul class="nav nav-tabs" id='steps'>
+          <ul class="nav nav-tabs steps" id='steps'>
               {% for step in classroom.steps %}
-                <li{% if forloop.first %} class='active'{%endif %}>
+                <li {% if forloop.first %}class="active"{% endif %} step_url="{% url class_step classroom.pk step.pk %}">
                   <a href="#step{{step.pk}}" data-toggle="tab">{{step.name}}</a>
                 </li>
               {% endfor %}
@@ -87,7 +87,14 @@
           </div>
         </div>
         <h3>Controls</h3>
-        <a href="#" class="btn btn-primary btnPrev" style="display: none;"><i class='icon-arrow-left icon-white'></i> Previous step</a> <a href="#" class="btn btn-primary btnNext" >Next step <i class='icon-arrow-right icon-white'></i></a>
+        <a href="#" class="btn btn-primary btnPrev" style="display: none;">
+          <i class='icon-arrow-left icon-white'></i>
+          Previous step
+        </a>
+        <a href="#" class="btn btn-primary btnNext">
+          Next step
+          <i class='icon-arrow-right icon-white'></i>
+        </a>
       </div>
 
     </div>

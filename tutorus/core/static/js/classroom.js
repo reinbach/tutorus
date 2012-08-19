@@ -53,11 +53,18 @@ $(function() {
         return false;
     });
 
-    $('.btnNext').on('click', function() {
+    $(".steps").on("click", "li", function() {
+        var step_url = $(this).attr("step_url");
+        publishNextStep(step_url);
+    });
+
+    $('.btnNext').on('click', function(event) {
+        event.preventDefault();
         nextTab();
     });
 
     $('.btnPrev').on('click', function() {
+        event.preventDefault();
         prevTab();
     });
 
@@ -88,8 +95,14 @@ function subscribeClassRoomChannel(channel, username) {
                 break;
             case "answer_question":
                 answerQuestion(message.question);
+                break;
             case "scratchpad":
                 setScratchpad(message);
+                break;
+            case "step":
+                // need to update students view
+                console.log(message);
+                break;
             default:
                 console.log(message.type);
                 break;
@@ -189,6 +202,13 @@ function setScratchpad(message) {
     $("#scratchpad_form textarea").html(message.data);
 }
 
+function publishNextStep(url) {
+    $.ajax({
+        type: "GET",
+        url: url,
+    });
+}
+
 function nextTab() {
     var e = $('#steps li.active').next().find('a[data-toggle="tab"]');
     if (e.length > 0) {
@@ -223,4 +243,3 @@ function isFirstTab() {
     }
     return e;
 }
-

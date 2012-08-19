@@ -12,6 +12,7 @@ from core.utils import publish
 from questions.forms import AskQuestionForm
 from scratchpad.forms import ScratchpadForm
 from scratchpad.models import Scratchpad
+from step.models import Step
 
 from .models import ClassRoom, ClassRoomStudentInterest
 from .forms import ClassRoomForm
@@ -20,10 +21,10 @@ log = logging.getLogger(__name__)
 
 
 def tutor_only(func):
-    def decorator(request, classroom_id):
+    def decorator(request, classroom_id, *args, **kwargs):
         classroom = ClassRoom.objects.get(pk=classroom_id)
         if classroom.is_tutor(request.user):
-            return func(request, classroom)
+            return func(request, classroom, *args, **kwargs)
         messages.info(request, "You are not the Tutor")
         return HttpResponseRedirect(reverse('class_home'))
     return decorator
@@ -191,6 +192,21 @@ def class_scratchpad(request, classroom):
             return HttpResponseBadRequest(message)
         return HttpResponse(json.dumps(message))
     return HttpResponseNotFound("Need to post")
+
+@login_required
+@tutor_only
+def class_step(request, classroom, step_id):
+    step = get_object_or_404(Step, pk=step_id)
+    channel = "classroom_{0}".format(classroom.pk)
+    pub_message = {
+        "type": "step",
+        "data": {
+            "step": step.pk,
+            "content": step.content
+        }
+    }
+    publish(channel, pub_message)
+    return HttpResponse(json.dumps({"success": True}))
 
 def home(request):
     context = dict(
