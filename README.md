@@ -9,6 +9,11 @@ Authors
 - John Costa
 - Ken Cochrane
 
+Documentation
+=============
+Just like all the cool projects, we are on Read the Docs. http://tutorus.readthedocs.org
+
+
 Demo Site
 =========
 
