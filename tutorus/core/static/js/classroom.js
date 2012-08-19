@@ -34,6 +34,9 @@ function subscribeClassRoomChannel(channel, username) {
             case "new_question":
                 addQuestion(message.question);
                 break;
+            case "top_question":
+                setTopQuestions(message.questions);
+                break;
             default:
                 console.log(message.type);
                 break;
@@ -69,24 +72,46 @@ function incrementStudentCount() {
     $("#student_count").text(count);
 }
 
-function addQuestion(question) {
-    // question added to asked list
+function createQuestion(question) {
     q = "<li id='question-" + question.pk + "'> \
-      <h4> \
-        <a href='" + question.up_vote_url + "' class='up_vote'> \
+      <h4>";
+
+    if (question.up_vote_url) {
+        q += "<a href='" + question.up_vote_url + "' class='up_vote'> \
           <span class='label label-success'><i class='icon-arrow-up'></i></span> \
-        </a> \
-        " + question.subject + " \
+          </a>";
+    }
+
+    if (question.vote_count) {
+        q += "<span class='label label-success'>" + question.vote_count + "</span>";
+    }
+
+    q += " " + question.subject + " \
       </h4> \
       <blockquote> \
         <p>" + question.content + "</p> \
         <small> " + question.student  + "</small> \
       </blockquote> \
     </li>";
+    return q;
+}
+function addQuestion(question) {
+    // question added to asked list
+    q = createQuestion(question);
     $("#new-questions").prepend(q);
     // if asked list greater then set #
     // remove older questions
     if ($("#new-questions li").length > parseInt($("#max_new_question_count").text())) {
         $("#new-questions li:last").remove();
+    }
+}
+
+function setTopQuestions(questions) {
+    // for now to reload the top questions
+    var top_question = $("#top-questions");
+    top_question.find("li").remove();
+    for (i = 0; i <= questions.length; i++) {
+        q = createQuestion(questions[i]);
+        top_question.append(q);
     }
 }
