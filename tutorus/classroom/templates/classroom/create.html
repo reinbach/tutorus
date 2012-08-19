@@ -3,19 +3,44 @@
 
 {% block title %}{% trans "Create Class" %}{% endblock %}
 
+{% block page-js %}
+
+    <script type="text/javascript">
+  $(document).ready(function(){
+    $("#create_class_form").validate({
+      rules: {
+        name: "required"
+      },
+      highlight: function(label) {
+          $(label).closest('.control-group').addClass('error');
+      },
+      success: function(label) {
+        label
+        .text('OK!').addClass('valid')
+       .closest('.control-group').addClass('success');
+      }
+    });
+  });
+  </script>
+
+{% endblock page-js %}
+
 {% block content %}
   <section id="classroom">
     <div class="page-header">
       <h1>Create Classroom <small>bringing knowledge to the world</small></h1>
     </div>
     <div class="row">
-      <form class="form-horizontal" action="" enctype="multipart/form-data" method="post">
+        
+        {{ form.non_field_errors }}
+        
+      <form id='create_class_form' class="form-horizontal" action="" enctype="multipart/form-data" method="post">
         <fieldset>
-          <div class="control-group">
-            <label class="control-label" for="input01">Class Name</label>
+          <div class="control-group {%if form.name.errors %}error{% endif %}">
+            <label class="control-label" for="input01">*Class Name</label>
             <div class="controls">
               {{form.name}}
-              <p class="help-block"></p>
+              <span class="help-inline">{{form.name.errors}}</span>
             </div>
           </div>
 

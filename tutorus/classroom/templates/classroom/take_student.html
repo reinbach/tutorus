@@ -34,7 +34,29 @@
         });
       });
     </script>
+    <script type="text/javascript">
+  $(document).ready(function(){
+    $("#ask_question_form").validate({
+      rules: {
+        subject: "required",
+        content: "required"
+      },
+      highlight: function(label) {
+          $(label).closest('.control-group').addClass('error');
+      },
+      success: function(label) {
+        label
+        .text('OK!').addClass('valid')
+       .closest('.control-group').addClass('success');
+      }
+    });
+  });
+  </script>
 {% endblock page-js %}
+
+{% block page-css %}
+
+{% endblock page-css %}
 
 {% block content %}
   <section class="class">
@@ -98,20 +120,21 @@
             </div>
             <div id="class-ask" class="accordion-body collapse in">
               <div class="accordion-inner">
+                  {{ form.non_field_errors }}
                 <form method="post" id="ask_question_form" action="{% url question_ask classroom.pk %}">
                   <fieldset>
-                    <div class="control-group">
-                      <label class="control-label" for="input01">Subject</label>
+                    <div class="control-group {%if form.subject.errors %}error{% endif %}">
+                      <label class="control-label" for="subject">*Subject</label>
                       <div class="controls">
                         {{ question_form.subject }}
-                        <p class="help-block"></p>
+                        <span class="help-inline">{{form.subject.errors}}</span>
                       </div>
                     </div>
-                    <div class="control-group">
-                      <label class="control-label" for="input01">Question</label>
+                    <div class="control-group {%if form.content.errors %}error{% endif %}">
+                      <label class="control-label" for="content">*Question</label>
                       <div class="controls">
                         {{ question_form.content }}
-                        <p class="help-block"></p>
+                        <span class="help-inline">{{form.content.errors}}</span>
                       </div>
                     </div>
                     <div class="form-actions">

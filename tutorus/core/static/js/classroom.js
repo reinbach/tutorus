@@ -8,6 +8,10 @@ $(function() {
             success: function(data) {
                 var d = $.parseJSON(data);
                 $("#question-" + d.success).hide();
+            },
+            error: function(data, error) {
+                alert(data);
+                alert(error);
             }
         });
         return false;
