@@ -19,8 +19,12 @@ __docformat__ = 'restructuredtext en'
 class ClassRoomFixture(TestCase):
 
     @property
-    def faux_user(self):
-        return User.objects.get_or_create(username='faux_user')[0]
+    def student_user(self):
+        return User.objects.get_or_create(username='student_user')[0]
+
+    @property
+    def tutor_user(self):
+        return User.objects.get_or_create(username='tutor_user')[0]
 
     @property
     def classroom_steps(self):
@@ -29,7 +33,7 @@ class ClassRoomFixture(TestCase):
     @property
     def classroom(self):
         classroom = ClassRoom(name='My classroom',
-                              tutor=self.faux_user,
+                              tutor=self.tutor_user,
                               description='My classroom description')
         classroom.save()
         return classroom
@@ -42,7 +46,7 @@ class WhenInitialClassroomIsCreated(ClassRoomFixture):
 
     def test_it(self):
         self.assertEquals(self.classroom.name, 'My classroom')
-        self.assertEquals(self.classroom.tutor, self.faux_user)
+        self.assertEquals(self.classroom.tutor, self.tutor_user)
         self.assertEquals(self.classroom.description,
                           'My classroom description')
 
@@ -63,3 +67,50 @@ class InitialClassRoomsAreNotActive(ClassRoomFixture):
 
     def test_it(self):
         self.assertFalse(self.is_active)
+
+
+class TutorUserIsTheTutor(ClassRoomFixture):
+
+    def setUp(self):
+        self.is_tutor = self.classroom.is_tutor(self.tutor_user)
+
+    def test_it(self):
+        self.assertTrue(self.is_tutor)
+
+
+class StudentUserIsNotTheTutor(ClassRoomFixture):
+
+    def setUp(self):
+        self.is_tutor = self.classroom.is_tutor(self.student_user)
+
+    def test_it(self):
+        self.assertFalse(self.is_tutor)
+
+
+class InitialClassUnansweredQuestions(ClassRoomFixture):
+
+    def setUp(self):
+        self.latest_unanswered_questions = \
+            self.classroom.latest_unanswered_questions()
+
+    def test_it(self):
+        self.assertEqual(len(self.latest_unanswered_questions), 0)
+
+
+class InitialClassUnansweredQuestionsTutor(ClassRoomFixture):
+
+    def setUp(self):
+        self.latest_unanswered_questions =\
+            self.classroom.latest_unanswered_questions(self.tutor_user)
+
+    def test_it(self):
+        self.assertEqual(len(self.latest_unanswered_questions), 0)
+
+
+class InitialClassTopQuestions(ClassRoomFixture):
+
+    def setUp(self):
+        self.top_questions = self.classroom.top_questions()
+
+    def test_it(self):
+        self.assertEqual(len(self.top_questions), 0)
