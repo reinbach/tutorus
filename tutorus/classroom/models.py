@@ -22,16 +22,9 @@ class ClassRoom(TimeStampedModel):
     STATUS = Choices('draft', 'active', 'closed')
 
     name = models.CharField(_('name'), max_length=255, blank=True)
-    slug = models.SlugField(null=True, blank=True, default="", unique=True)
     tutor = models.ForeignKey(User, verbose_name=_('tutor'))
     description = models.TextField(blank=True, null=True, default="")
     status = StatusField(default=STATUS.draft)
-
-    def save(self, *args, **kwargs):
-        # removing because it doesn't work correctly on heroku for some weird reason
-        #if not self.slug:
-        #    self.slug = slugify_uniquely(self.name, self.__class__)
-        super(ClassRoom, self).save(*args, **kwargs)
 
     @property
     def steps(self):
