@@ -99,19 +99,21 @@ def class_activate(request, classroom):
 def class_interest(request, classroom_id):
     """Mark students interest in the class"""
     classroom = get_object_or_404(ClassRoom, pk=classroom_id)
-    interest, r = ClassRoomStudentInterest.objects.get_or_create(
+    interest, created = ClassRoomStudentInterest.objects.get_or_create(
         student=request.user,
         classroom=classroom
     )
-    # publish interest to class channel
-    pubnub = get_pubnub_connection()
-    pubnub.publish({
-        "channel": "tutor_{0}".format(classroom.tutor.pk),
-        "message": {
-            "type": "interest",
-            "interest": classroom.interest(),
-        }
-    })
+    # publish interest to class channel, only if interest added
+    if created:
+        pubnub = get_pubnub_connection()
+        pubnub.publish({
+            "channel": "classes",
+            "message": {
+                "type": "interest",
+                "classroom": classroom.pk,
+                "interest": classroom.interest(),
+            }
+        })
     return HttpResponse(json.dumps({"success": True}))
 
 
@@ -172,4 +174,9 @@ def home(request):
     context = dict(
         classrooms=ClassRoom.objects.filter(status='active')
     )
+    if request.user.is_authenticated():
+        interest_list = ClassRoomStudentInterest.objects.values_list(
+            "classroom__pk"
+        ).filter(student=request.user)
+        context.update(interest_list=[x[0] for x in interest_list])
     return render(request, "classroom/index.html", context)

@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
+{% block page-js %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/classes.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        subscribeClassesChannel();
+      });
+    </script>
+{% endblock page-js %}
+
 {% block content %}
   <section id="classroom">
     <div class="page-header">
@@ -15,6 +24,7 @@
               <th>Name</th>
               <th>Description</th>
               <th>Status</th>
+              <th>Interested</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -24,7 +34,8 @@
                 <td>{{ forloop.counter }}</td>
                 <td><h2>{{ classroom.name }} </h2></td>
                 <td>{{ classroom.description }}</td>
-                <td>[{{ classroom.status }}]</td>
+                <td>{{ classroom.status }}</td>
+                <td id="interest-{{ classroom.pk }}">{{ classroom.interest }}</td>
                 <td>
                   <a href='{% url class_create_step classroom.pk %}'><i class="icon-pencil"></i></a>
                   <a class="btn btn-primary btn-small" href="{% url class_take classroom.pk %}">Enter Class</a>
