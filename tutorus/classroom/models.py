@@ -73,7 +73,8 @@ class ClassRoom(TimeStampedModel):
         """
         from questions.models import QuestionVotes
         top_list = QuestionVotes.objects.filter(
-            question__classroom=self
+            question__classroom=self,
+            question__status=question_constants.ASKED
         ).annotate(num_votes=Count("question")).order_by("num_votes")
         top_list = [x.question for x in top_list]
         return top_list[:settings.TOP_QUESTIONS_COUNT]
