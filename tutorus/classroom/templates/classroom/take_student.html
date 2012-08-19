@@ -120,7 +120,7 @@
             </div>
             <div id="class-ask" class="accordion-body collapse in">
               <div class="accordion-inner">
-                  {{ form.non_field_errors }}
+                {{ form.non_field_errors }}
                 <form method="post" id="ask_question_form" action="{% url question_ask classroom.pk %}">
                   <fieldset>
                     <div class="control-group {%if form.subject.errors %}error{% endif %}">
