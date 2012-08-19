@@ -24,6 +24,7 @@
                if (d.success) {
                  form[0].reset();
                  // alert question
+                 validator.resetForm();
                } else {
                  // highlight error fields
                  console.log(d);
@@ -33,7 +34,7 @@
            return false;
         });
 
-        $("#ask_question_form").validate({
+        var validator = $("#ask_question_form").validate({
           rules: {
             subject: "required",
             content: "required"
@@ -47,6 +48,11 @@
            .closest('.control-group').addClass('success');
           }
         });
+        
+      $('#clear_button').click(function() {
+          validator.resetForm();
+      });
+        
       });
     </script>
 {% endblock page-js %}
@@ -137,7 +143,7 @@
                     </div>
                     <div class="form-actions">
                       <button type="submit" class="btn btn-primary">Ask Question</button>
-                      <button type="reset" class="btn">Clear</button>
+                      <button type="reset" class="btn" id='clear_button'>Clear</button>
                     </div>
                   </fieldset>
                   {% csrf_token %}
