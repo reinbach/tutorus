@@ -1,1 +1,1 @@
-web: python tutorus/manage.py collectstatic --noinput; python tutorus/manage.py --settings=settings.prod run_gunicorn -w 3 -b 0.0.0.0:$PORT
+web: python tutorus/manage.py collectstatic --noinput; python tutorus/manage.py run_gunicorn -w 3 -b 0.0.0.0:$PORT
