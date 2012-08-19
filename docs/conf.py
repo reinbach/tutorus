@@ -17,9 +17,9 @@ import sys, os
 sys.path.insert(0, os.path.abspath('../tutorus'))
 sys.path.insert(0, os.path.abspath('../test_project'))
 
-from settings import prod
+from settings import test
 from django.core.management import setup_environ
-setup_environ(prod)
+setup_environ(test)
 
 
 
