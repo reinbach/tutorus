@@ -5,9 +5,37 @@
 
 
 {% block page-js %}
-
+    <script src="{{ STATIC_URL }}epiceditor/js/epiceditor.min.js"></script>
     <script type="text/javascript">
+    var opts = {
+  container: 'epiceditor',
+  basePath: '{{ STATIC_URL }}epiceditor',
+  parser: marked,
+  clientSideStorage: false,
+  theme: {
+    base:'/themes/base/epiceditor.css',
+    preview:'/themes/preview/preview-dark.css',
+    editor:'/themes/editor/epic-dark.css'
+  },
+  shortcut: {
+    modifier: 18,
+    fullscreen: 70,
+    preview: 80,
+    edit: 79
+  }
+}
+var editor = new EpicEditor(opts).load();
+    
+    
   $(document).ready(function(){
+    
+    editor.importFile('some-file',$("#id_content").val());
+    
+    $('#save_button').click(function() {
+        var theContent = editor.exportFile(null,'html');
+        $("#id_content").val(theContent);
+   });
+      
     $("#add_step_form").validate({
       rules: {
         name: "required"
@@ -41,14 +69,15 @@
     </div>
     
     <div class="control-group">
-      <label class="control-label" for="input01">Content</label>
+      <label class="control-label" for="input01">Content (markdown)</label>
       <div class="controls">
+        <div id="epiceditor"></div>
         {{form.content}}
         <p class="help-block"></p>
       </div>
     </div>
     <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary" id='save_button'>Save changes</button>
             <button class="btn">Cancel</button>
     </div>
   </fieldset>
