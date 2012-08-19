@@ -88,9 +88,7 @@ def publish_top_questions(classroom):
             "subject": question.subject,
             "content": question.content,
             "student": question.student.username,
-            "up_vote_url": reverse(
-                "question_up_vote", args=[question.pk]
-            ),
+            "vote_count": question.vote_count(),
         })
     pubnub = get_pubnub_connection()
     pubnub.publish({
