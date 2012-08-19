@@ -79,7 +79,7 @@
             {% for step in classroom.steps %}
               <div class="tab-pane{% if forloop.first %} active{%endif %}" id="step{{step.pk}}">
                 <div class="well" style="padding: 8px 0; height: 450px;">
-                 <p>{{ step.content }}</p>
+                 <p>{{ step.content|safe }}</p>
                 </div>
               </div>
             {% endfor %}

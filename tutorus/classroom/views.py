@@ -92,6 +92,26 @@ def class_activate(request, classroom):
     context = {'classroom': classroom}
     return render(request, 'classroom/steps.html', context)
 
+@login_required
+def class_list(request):
+    """List of classes for tutor
+
+    If there are no classes, then redirect to create a class
+    """
+    classrooms = ClassRoom.objects.filter(tutor=request.user)
+    if not classrooms.exists():
+        # if being redirected from create class
+        # head to home page instead, no need to send
+        # user back to where they came from
+        if "from" in request.GET and request.GET['from'] == "create":
+            return HttpResponseRedirect(reverse("home"))
+        return HttpResponseRedirect(reverse("class_create"))
+    context = dict(
+        classrooms=classrooms,
+        page="class"
+    )
+    return render(request, 'classroom/list.html', context)
+
 
 @login_required
 def class_take(request, classroom_id):
@@ -125,7 +145,6 @@ def class_take(request, classroom_id):
 
 def home(request):
     context = dict(
-        classrooms=ClassRoom.objects.all()  # so we get something change
-                                              # later filter(status='active')
+        classrooms=ClassRoom.objects.filter(status='active')
     )
     return render(request, "classroom/index.html", context)

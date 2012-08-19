@@ -8,11 +8,10 @@
     <div class="row">
       {% for classroom in classrooms %}
         <div class="span4">
-          <h2>{{ classroom.name }} <a href='{% url class_create_step classroom.pk %}'><i class="icon-pencil"></i></a></h2>
+          <h2>{{ classroom.name }}</h2>
           <p>{{ classroom.description }}</p>
-          <p>[{{ classroom.status }}]</p>
           {% if classroom.is_active %}
-              <a class="btn btn-primary btn-small" href="{% url class_take classroom.pk %}">Take Class</a>
+              <a class="btn btn-primary btn-small" href="{% url class_take classroom.pk %}">Enter Class</a>
           {% endif %}
         </div>
       {% endfor %}
