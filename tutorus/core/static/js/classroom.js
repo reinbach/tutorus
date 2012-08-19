@@ -147,7 +147,7 @@ function setTopQuestions(questions) {
 
 function answerQuestion(question) {
     q = createQuestion(question);
-    $("#answer-questions").append(q);
+    $("#answered-questions").append(q);
     // remove question from top questions
     $("#top-question-" + question.pk).hide();
 }
