@@ -2,10 +2,10 @@
 
 """
 
-    
-    ~~~~~~~~~~~~~~
+    classroom.tests.test.views.test_class_take
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Short description of what's contained in the file
+    `class_take` view unit tests
 
 """
 from django.core.urlresolvers import reverse
