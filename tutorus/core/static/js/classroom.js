@@ -65,6 +65,9 @@ function incrementStudentCount() {
     // get student count element
     // grab the value increment by 1
     // set value
+    var count = parseInt($("#student_count").text());
+    count += 1;
+    $("#student_count").text(count);
 }
 
 function addQuestion(question) {
