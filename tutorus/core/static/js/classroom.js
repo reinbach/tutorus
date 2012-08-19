@@ -101,7 +101,7 @@ function subscribeClassRoomChannel(channel, username) {
                 break;
             case "step":
                 // need to update students view
-                console.log(message);
+                setStep(message.data)
                 break;
             default:
                 console.log(message.type);
@@ -200,6 +200,11 @@ function answerQuestion(question) {
 
 function setScratchpad(message) {
     $("#scratchpad_form textarea").html(message.data);
+}
+
+function setStep(step) {
+    $("#step_name").html(step.name);
+    $("#step_content").html(step.content);
 }
 
 function publishNextStep(url) {

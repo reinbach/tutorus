@@ -65,30 +65,15 @@
     <div class="row">
 
       <div class="span8">
-        <div class="tabbable tabs-left">
-          <ul class="nav nav-tabs">
-            <li class="nav-header">Steps</li>
-              {% for step in classroom.steps %}
-                <li{% if forloop.first %} class='active'{%endif %}>
-                  <a href="#step{{step.pk}}" data-toggle="tab" >{{step.name}}</a>
-                </li>
-              {% endfor %}
-          </ul>
-          <div class="tab-content">
-            {% for step in classroom.steps %}
-              <div class="tab-pane{% if forloop.first %} active{%endif %}" id="step{{step.pk}}">
-                <div class="well">
-                 <p>{{ step.content|safe }}</p>
-                </div>
-              </div>
-            {% endfor %}
-          </div>
+        <h3>Step: <span id="step_name">{{ first_step.name }}</span></h3>
+        <div class="well">
+          <p id="step_content">{{ first_step.content }}</p>
         </div>
 
         <h3>Scratchpad</h3>
         <form id="scratchpad_form" action="{% url class_take classroom.id %}" method="POST">
-            <textarea name="content" rows="10" style="width: 760px;" disabled="disabled"></textarea>
-         </form>
+          <textarea name="content" rows="10" style="width: 760px;" disabled="disabled"></textarea>
+        </form>
       </div>
 
       <div class="span4">
