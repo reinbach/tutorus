@@ -7,7 +7,7 @@ class ClassRoomForm(ModelForm):
 
     class Meta:
         model = ClassRoom
-        exclude = ('status', 'tutor',)
+        exclude = ('status', 'tutor', 'slug')
 
     def save(self, user, commit=True):
 
