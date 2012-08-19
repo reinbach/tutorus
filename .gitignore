@@ -6,3 +6,6 @@ coverage
 local_settings.py
 .DS_Store
 currentenv.py
+_templates
+_static
+_build
