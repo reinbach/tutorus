@@ -13,6 +13,7 @@ from django.template.defaultfilters import slugify
 from django.test.testcases import TestCase
 
 from classroom.models import ClassRoom
+from utils import slugify_uniquely
 
 __docformat__ = 'restructuredtext en'
 
@@ -50,7 +51,9 @@ class WhenInitialClassroomIsCreated(ClassRoomFixture):
         self.assertEquals(self.classroom.tutor, self.tutor_user)
         self.assertEquals(self.classroom.description,
                           'My classroom description')
-        self.assertEquals(self.classroom.slug, slugify('My classroom'))
+        # TODO This works as long as we don't save a bunch of them. Needs to
+        #      come back to this.
+        self.assertEqual(self.classroom.slug[:12], slugify('My classroom'))
 
 
 class InitialClassRoomsDoNotHaveSteps(ClassRoomFixture):
