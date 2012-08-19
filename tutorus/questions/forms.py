@@ -11,7 +11,7 @@ class AskQuestionForm(forms.ModelForm):
 
     class Meta:
         model = Question
-        exclude=('classroom', 'status', 'student', 'answer',)
+        exclude=('classroom', 'status', 'student', 'answer','answer_date')
 
     def save(self, user, classroom, commit=True):
         question = super(AskQuestionForm, self).save(commit=False)

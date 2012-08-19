@@ -58,6 +58,7 @@ def ask_question(request, classroom):
             publish(channel, pub_message)
         else:
             message = {"error": form.errors}
+            print message
             return HttpResponseBadRequest(message)
         return HttpResponse(json.dumps(message))
     return HttpResponseNotFound("Need to post")
