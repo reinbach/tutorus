@@ -75,6 +75,8 @@ function subscribeClassRoomChannel(channel, username) {
                 break;
             case "answer_question":
                 answerQuestion(message.question);
+            case "scratchpad":
+                setScratchpad(message);
             default:
                 console.log(message.type);
                 break;
@@ -168,4 +170,8 @@ function answerQuestion(question) {
     $("#answered-questions").append(q);
     // remove question from top questions
     $("#top-question-" + question.pk).hide();
+}
+
+function setScratchpad(message) {
+    $("#scratchpad_form textarea").html(message.data);
 }
