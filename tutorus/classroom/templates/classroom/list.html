@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
+{% block page-js %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/classroom.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        subscribeClassesChannel();
+      });
+    </script>
+{% endblock page-js %}
+
 {% block content %}
   <section id="classroom">
     <div class="page-header">
