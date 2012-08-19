@@ -31,12 +31,8 @@ var editor = new EpicEditor(opts).load();
     
     editor.importFile('some-file',$("#id_content").val());
     
-    $('#save_button').click(function() {
-        var theContent = editor.exportFile(null,'html');
-        $("#id_content").val(theContent);
-   });
-      
-    $("#add_step_form").validate({
+
+    var validator = $("#add_step_form").validate({
       rules: {
         name: "required"
       },
@@ -49,6 +45,18 @@ var editor = new EpicEditor(opts).load();
        .closest('.control-group').addClass('success');
       }
     });
+
+    $('#save_button').click(function() {
+        var theContent = editor.exportFile(null,'html');
+        $("#id_content").val(theContent);
+        validator.resetForm(); 
+   });
+   
+    $('#cancel_button').click(function() {
+        validator.resetForm(); 
+   });
+     
+    
   });
   </script>
 
@@ -78,7 +86,7 @@ var editor = new EpicEditor(opts).load();
     </div>
     <div class="form-actions">
             <button type="submit" class="btn btn-primary" id='save_button'>Save changes</button>
-            <button class="btn">Cancel</button>
+            <a class="btn" id="cancel_button" href='{% url class_create_step classroom.pk %}'>Cancel</a>
     </div>
   </fieldset>
 
