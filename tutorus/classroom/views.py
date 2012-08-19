@@ -162,7 +162,7 @@ def class_take(request, classroom_id):
         latest_questions_count=settings.LATEST_QUESTIONS_COUNT,
     )
     if classroom.is_tutor(request.user):
-        context.update(tutor=True)
+        context.update(is_tutor=True)
         return render(request, "classroom/take.html", context)
     context.update(
         question_form=AskQuestionForm()
