@@ -1,5 +1,25 @@
 {% extends "base.html" %}
 
+{% block page-js %}
+  <script type="text/javascript">
+    $(function() {
+      // when interest button is clicked
+      // do ajax call and hide button
+      $(".interest").on("click", function(event) {
+        event.preventDefault();
+        var interest_button = $(this);
+        $.ajax({
+          type: "GET",
+          url: $(this).attr("href"),
+          success: function(data) {
+            interest_button.hide();
+          }
+        });
+      });
+    });
+  </script>
+{% endblock page-js %}
+
 {% block content %}
   <section id="classroom">
     <div class="page-header">
@@ -13,7 +33,7 @@
           {% if classroom.is_active %}
               <a class="btn btn-primary btn-small" href="{% url class_take classroom.pk %}">Enter Class</a>
           {% endif %}
-          <a class="btn btn-info btn-small" href="{% url class_interest classroom.pk %}">I'm Interested</a>
+          <a class="btn btn-info btn-small interest" href="{% url class_interest classroom.pk %}">I'm Interested</a>
         </div>
       {% endfor %}
     </div>
