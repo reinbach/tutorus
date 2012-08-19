@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load classroom_tags %}
 
 {% block title %}{{ classroom.name }} {% trans "Class in Session" %}{% endblock title %}
 
@@ -99,7 +100,7 @@
               </a>
             </div>
             <div id="class-questions" class="accordion-body collapse in">
-              <div class="accordion-inner">Line of questions</div>
+              <div class="accordion-inner">{% top_questions classroom %}</div>
             </div>
           </div>
           <div class="accordion-group">

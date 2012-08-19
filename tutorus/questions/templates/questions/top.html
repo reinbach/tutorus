@@ -9,6 +9,11 @@
         <p>{{ question.content }}</p>
         <small> {{ question.student.username }}</small>
       </blockquote>
+      {% if is_tutor %}
+        <form method="post" id="answer_form" action="{% url question_answer question.pk %}">
+          <textarea cols="20" rows="5"></textarea>
+        </form>
+      {% endif %}
     </li>
   {% endfor %}
 </ul>
