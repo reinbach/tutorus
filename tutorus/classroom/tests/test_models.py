@@ -63,3 +63,12 @@ class InitialClassRoomsAreNotActive(ClassRoomFixture):
 
     def test_it(self):
         self.assertFalse(self.is_active)
+
+
+class FauxUserIsTheTutor(ClassRoomFixture):
+
+    def setUp(self):
+        self.is_tutor = self.classroom.is_tutor(self.faux_user)
+
+    def test_it(self):
+        self.assertTrue(self.is_tutor)
