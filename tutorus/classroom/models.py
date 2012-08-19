@@ -28,8 +28,9 @@ class ClassRoom(TimeStampedModel):
     status = StatusField(default=STATUS.draft)
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify_uniquely(self.name, self.__class__)
+        # removing because it doesn't work correctly on heroku for some weird reason
+        #if not self.slug:
+        #    self.slug = slugify_uniquely(self.name, self.__class__)
         super(ClassRoom, self).save(*args, **kwargs)
 
     @property
