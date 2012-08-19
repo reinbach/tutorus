@@ -37,7 +37,7 @@
                 <td>{{ classroom.status }}</td>
                 <td id="interest-{{ classroom.pk }}">{{ classroom.interest }}</td>
                 <td>
-                  <a class="btn" href='{% url class_create_step classroom.pk %}'>Edit</a>
+                  {% if request.user == classroom.tutor %}<a class="btn" href='{% url class_create_step classroom.pk %}'>Edit</a>{% endif %}
                   <a class="btn btn-primary btn-small" href="{% url class_take classroom.pk %}">Enter Class</a>
                 </td>
               </tr>
