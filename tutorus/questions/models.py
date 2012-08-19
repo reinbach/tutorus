@@ -21,6 +21,7 @@ class Question(models.Model):
     student = models.ForeignKey(User, verbose_name=_('student'))
     created = models.DateTimeField(auto_now_add=True)
     answer = models.TextField(_('Answer'), blank=True, null=True, default="")
+    answer_date = models.DateTimeField(null=True)
 
     def vote_count(self):
         """Get a count of votes"""
