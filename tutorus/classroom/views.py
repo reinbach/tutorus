@@ -124,7 +124,12 @@ def class_list(request):
      - if coming from create page, then go home
      - other to decision page (find / create)
     """
-    classrooms = ClassRoom.objects.filter(tutor=request.user)
+    tutoring_list = list(ClassRoom.objects.filter(
+        tutor=request.user).values_list('pk', flat=True))
+    interested_list = list(ClassRoomStudentInterest.objects.filter(
+        student=request.user).values_list('classroom', flat=True))
+    classrooms = ClassRoom.objects.filter(pk__in=tutoring_list+interested_list)
+
     if not classrooms.exists():
         # if being redirected from create class
         # head to home page instead, no need to send

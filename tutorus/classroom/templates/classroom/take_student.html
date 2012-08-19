@@ -70,7 +70,7 @@
             <li class="nav-header">Steps</li>
               {% for step in classroom.steps %}
                 <li{% if forloop.first %} class='active'{%endif %}>
-                  <a href="#step{{step.pk}}" data-toggle="tab">{{step.name}}</a>
+                  <a href="#step{{step.pk}}" data-toggle="tab" >{{step.name}}</a>
                 </li>
               {% endfor %}
           </ul>
