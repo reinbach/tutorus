@@ -165,6 +165,7 @@ def class_take(request, classroom_id):
         user=request.user,
         scratchpad_form=scratchpad_form,
         latest_questions_count=settings.LATEST_QUESTIONS_COUNT,
+        first_step=classroom.steps[0],
     )
     if classroom.is_tutor(request.user):
         context.update(is_tutor=True)
@@ -202,7 +203,8 @@ def class_step(request, classroom, step_id):
     pub_message = {
         "type": "step",
         "data": {
-            "step": step.pk,
+            "pk": step.pk,
+            "name": step.name,
             "content": step.content
         }
     }
