@@ -3,6 +3,9 @@ from django import forms
 from models import Question
 
 class AskQuestionForm(forms.ModelForm):
+    subject = forms.CharField(required=True)
+    content = forms.CharField(required=True, widget=forms.Textarea())
+    
     class Meta:
         model = Question
         exclude=('classroom', 'status', 'student',)

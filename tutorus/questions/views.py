@@ -3,7 +3,7 @@ import logging
 
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadRequest
 
 from classroom.models import ClassRoom
 
@@ -51,6 +51,8 @@ def ask_question(request, classroom):
             })
         else:
             message = {"error": form.errors}
+            print message
+            return HttpResponseBadRequest(message)
         return HttpResponse(json.dumps(message))
     return HttpResponseNotFound("Need to post")
 

@@ -1,7 +1,9 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, CharField
 from .models import Step
 
 class StepForm(ModelForm):
+    name = CharField(required=True)
+
     class Meta:
         model = Step
         exclude = ('classroom','step_order')

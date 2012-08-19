@@ -1,9 +1,10 @@
-from django.forms import ModelForm
-
+from django.forms import ModelForm, CharField
 from .models import ClassRoom
 
 
 class ClassRoomForm(ModelForm):
+    name = CharField(required=True)
+
     class Meta:
         model = ClassRoom
         exclude = ('status', 'tutor',)

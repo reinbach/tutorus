@@ -4,16 +4,39 @@
 {% block title %}{% trans "Add Step" %}{% endblock %}
 
 
-{% block content %}
+{% block page-js %}
 
-<form class="form-horizontal" action="" enctype="multipart/form-data" method="post">
+    <script type="text/javascript">
+  $(document).ready(function(){
+    $("#add_step_form").validate({
+      rules: {
+        name: "required"
+      },
+      highlight: function(label) {
+          $(label).closest('.control-group').addClass('error');
+      },
+      success: function(label) {
+        label
+        .text('OK!').addClass('valid')
+       .closest('.control-group').addClass('success');
+      }
+    });
+  });
+  </script>
+
+{% endblock page-js %}
+
+{% block content %}
+{{ form.non_field_errors }}
+
+<form id="add_step_form" class="form-horizontal" action="" enctype="multipart/form-data" method="post">
   <fieldset>
     <legend>Add Step to {{classroom.name}}</legend>
-    <div class="control-group">
-      <label class="control-label" for="input01">Step Name</label>
+    <div class="control-group {%if form.name.errors %}error{% endif %}">
+      <label class="control-label" for="input01">*Step Name</label>
       <div class="controls">
         {{form.name}}
-        <p class="help-block"></p>
+        <span class="help-inline">{{form.name.errors}}</span>
       </div>
     </div>
     
