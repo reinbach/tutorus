@@ -75,9 +75,28 @@ def up_vote_question(request, question_id):
             voter=request.user
         )
         vote.save()
+        publish_top_questions(question.classroom)
         return HttpResponse(json.dumps({"success": question.pk}))
     return HttpResponseNotFound("Invalid question")
 
 def publish_top_questions(classroom):
     """Get a list of the highest voted questions for a classroom and publish"""
-    pass
+    top_questions = []
+    for question in classroom.top_questions():
+        top_questions.append({
+            "pk": question.pk,
+            "subject": question.subject,
+            "content": question.content,
+            "student": question.student.username,
+            "up_vote_url": reverse(
+                "question_up_vote", args=[question.pk]
+            ),
+        })
+    pubnub = get_pubnub_connection()
+    pubnub.publish({
+        "channel": "classroom_{0}".format(classroom.pk),
+        "message": {
+            "type": "top_question",
+            "questions": top_questions
+        }
+    })
