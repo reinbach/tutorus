@@ -159,7 +159,7 @@ function setTopQuestions(questions) {
     // for now to reload the top questions
     var top_question = $("#top-questions");
     top_question.find("li").remove();
-    for (i = 0; i <= questions.length; i++) {
+    for (i = 0; i < questions.length; i++) {
         q = createQuestion(questions[i]);
         top_question.append(q);
     }
