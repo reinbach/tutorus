@@ -100,11 +100,8 @@ function subscribeClassRoomChannel(channel, username) {
                 setScratchpad(message);
                 break;
             case "step":
-                if (message.data == "next") {
-                    nextTab();
-                } else {
-                    prevTab();
-                }
+                // need to update students view
+                console.log(message);
                 break;
             default:
                 console.log(message.type);
@@ -217,14 +214,12 @@ function nextTab() {
     if (e.length > 0) {
         e.click();
     }
-    publishNextStep(e.attr("href"));
     isLastTab();
 }
 
 function prevTab(elem) {
     var e = $('#steps li.active').prev().find('a[data-toggle="tab"]');
     if(e.length > 0) e.click();
-    publishNextStep(e.attr("href"));
     isFirstTab();
 }
 
