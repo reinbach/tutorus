@@ -30,7 +30,6 @@ function subscribeClassRoomChannel(channel, username) {
             switch (message.type) {
             case "student_connected":
                 incrementStudentCount();
-                console.log(message.name + " connected");
                 break;
             case "new_question":
                 addQuestion(message.question);
