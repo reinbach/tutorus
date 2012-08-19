@@ -100,6 +100,11 @@ def class_list(request):
     """
     classrooms = ClassRoom.objects.filter(tutor=request.user)
     if not classrooms.exists():
+        # if being redirected from create class
+        # head to home page instead, no need to send
+        # user back to where they came from
+        if "from" in request.GET and request.GET['from'] == "create":
+            return HttpResponseRedirect(reverse("home"))
         return HttpResponseRedirect(reverse("class_create"))
     context = dict(
         classrooms=classrooms
