@@ -105,3 +105,12 @@ class InitialClassUnansweredQuestionsTutor(ClassRoomFixture):
 
     def test_it(self):
         self.assertEqual(len(self.latest_unanswered_questions), 0)
+
+
+class InitialClassTopQuestions(ClassRoomFixture):
+
+    def setUp(self):
+        self.top_questions = self.classroom.top_questions()
+
+    def test_it(self):
+        self.assertEqual(len(self.top_questions), 0)
