@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Suggest Class" %}{% endblock %}
+
+
+{% block page-js %}
+    <script type="text/javascript">
+
+  $(document).ready(function(){
+    
+    var validator = $("#suggest_form").validate({
+      rules: {
+        name: "required",
+        email: {
+            required: true,
+            email: true
+        }
+      },
+      highlight: function(label) {
+          $(label).closest('.control-group').addClass('error');
+      },
+      success: function(label) {
+        label
+        .text('OK!').addClass('valid')
+       .closest('.control-group').addClass('success');
+      }
+    });
+
+    $('#save_button').click(function() {
+        validator.resetForm(); 
+    });
+   
+    $('#cancel_button').click(function() {
+        validator.resetForm(); 
+   });
+     
+    
+  });
+  </script>
+
+{% endblock page-js %}
+
+{% block content %}
+{{ form.non_field_errors }}
+
+<form id="suggest_form" class="form-horizontal" action="" method="post">
+  <fieldset>
+    <legend>Suggest a class</legend>
+    <div class="control-group {%if form.name.errors %}error{% endif %}">
+      <label class="control-label" for="input01">*Your Name</label>
+      <div class="controls">
+        {{form.name}}
+        <span class="help-inline">{{form.name.errors}}</span>
+      </div>
+    </div>
+    <div class="control-group {%if form.email.errors %}error{% endif %}">
+      <label class="control-label" for="input01">*Your Email</label>
+      <div class="controls">
+        {{form.email}}
+        <span class="help-inline">{{form.email.errors}}</span>
+      </div>
+    </div>
+    
+    <div class="control-group">
+      <label class="control-label" for="input01">Description</label>
+      <div class="controls">
+        <div id="epiceditor"></div>
+        {{form.description}}
+        <p class="help-block"></p>
+      </div>
+    </div>
+    <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id='save_button'>Send Suggestion</button>
+            <a class="btn" id="cancel_button" href='{% url home %}'>Cancel</a>
+    </div>
+  </fieldset>
+
+{% csrf_token %}
+</form>
+{% endblock %}
