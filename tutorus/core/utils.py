@@ -9,3 +9,10 @@ def get_pubnub_connection():
         settings.PUBNUB_SECRET_KEY,
         True
     )
+
+def publish(channel, message):
+    pubnub = get_pubnub_connection()
+    pubnub.publish({
+        "channel": channel,
+        "message": message
+    })

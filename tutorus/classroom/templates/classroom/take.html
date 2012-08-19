@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load classroom_tags %}
 
 {% block title %}{{ classroom.name }} {% trans "Class in Session" %}{% endblock title %}
 
@@ -7,23 +8,22 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/classroom.js"></script>
     <script type="text/javascript">
       $(function() {
+        subscribeClassRoomChannel("classroom_{{ classroom.pk }}", "{{ user.username }}");
+
         $(".collapse").collapse();
-      });
 
-      $(function() {
+        $('.btnNext').on('click', function() {
+          nextTab();
+        });
 
-          $('.btnNext').on('click', function() {
-              nextTab();
-          });
+        $('.btnPrev').on('click', function() {
+          prevTab();
+        });
 
-          $('.btnPrev').on('click', function() {
-              prevTab();
-          });
-
-          $('a[data-toggle="tab"]').on('shown', function (e) {
-            isLastTab();
-            isFirstTab();
-          });
+        $('a[data-toggle="tab"]').on('shown', function (e) {
+          isLastTab();
+          isFirstTab();
+        });
       });
 
       function nextTab() {
@@ -100,7 +100,7 @@
               </a>
             </div>
             <div id="class-questions" class="accordion-body collapse in">
-              <div class="accordion-inner">Line of questions</div>
+              <div class="accordion-inner">{% top_questions classroom %}</div>
             </div>
           </div>
           <div class="accordion-group">
