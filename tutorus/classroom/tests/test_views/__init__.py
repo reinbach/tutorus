@@ -8,4 +8,5 @@
     `view` tests the classroom app
 
 """
+from .test_create_classroom import *
 from .test_home import *
