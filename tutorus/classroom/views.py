@@ -109,6 +109,7 @@ def class_interest(request, classroom_id):
         "channel": "tutor_{0}".format(classroom.tutor.pk),
         "message": {
             "type": "interest",
+            "classroom": classroom.pk,
             "interest": classroom.interest(),
         }
     })
