@@ -9,6 +9,7 @@
 
 """
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 from django.test.testcases import TestCase
 
 from classroom.models import ClassRoom
@@ -49,6 +50,7 @@ class WhenInitialClassroomIsCreated(ClassRoomFixture):
         self.assertEquals(self.classroom.tutor, self.tutor_user)
         self.assertEquals(self.classroom.description,
                           'My classroom description')
+        self.assertEquals(self.classroom.slug, slugify('My classroom'))
 
 
 class InitialClassRoomsDoNotHaveSteps(ClassRoomFixture):

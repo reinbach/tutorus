@@ -1,10 +1,11 @@
 import logging
 
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Count
+from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.models import User
 
 from model_utils.fields import StatusField
 from model_utils import Choices
@@ -21,9 +22,14 @@ class ClassRoom(TimeStampedModel):
     STATUS = Choices('draft', 'active', 'closed')
 
     name = models.CharField(_('name'), max_length=255, blank=True)
+    slug = models.SlugField(null=True, blank=True, default="")
     tutor = models.ForeignKey(User, verbose_name=_('tutor'))
     description = models.TextField(blank=True, null=True, default="")
     status = StatusField(default=STATUS.draft)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(ClassRoom, self).save(*args, **kwargs)
 
     @property
     def steps(self):
