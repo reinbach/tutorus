@@ -8,6 +8,7 @@
     `templatetag` tests
 
 """
+from dingus import Dingus
 from django.contrib.auth.models import User
 from django.test.testcases import TestCase
 
@@ -47,7 +48,8 @@ class WhenNoQuestionsForUser(ClassRoomFixture):
 class WhenNoTopQuestions(ClassRoomFixture):
 
     def setUp(self):
-        self.top_questions = classroom_tags.top_questions(self.classroom)
+        self.top_questions = classroom_tags.top_questions(Dingus(),
+                                                          self.classroom)
 
     def test_it(self):
         self.assertEqual(len(self.top_questions['questions']), 0)
