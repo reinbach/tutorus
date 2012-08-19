@@ -1,7 +1,12 @@
 TutorUs
 =======
 
-Team FryMe's entry in the Django Dash 2012 competition
+Team FryMe's entry in the Django Dash 2012 competition.  The source code can be found here: https://github.com/reinbach/tutorus
+
+Demo Site
+=========
+
+A demo of the application can be found here: http://rocky-brook-2492.herokuapp.com/
 
 Setup/Installation
 ==================
