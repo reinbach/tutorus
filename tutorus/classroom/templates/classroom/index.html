@@ -28,7 +28,12 @@
     <div class="row">
       {% for classroom in classrooms %}
         <div class="span4">
-          <h2>{{ classroom.name }}</h2>
+          <h2>
+            {{ classroom.name }}
+            {% if classroom.pk in interest_list %}
+              <span class="label label-info">interested</span>
+            {% endif %}
+          </h2>
           <p>{{ classroom.description }}</p>
           {% if user.is_authenticated %}
             {% if classroom.is_active %}
