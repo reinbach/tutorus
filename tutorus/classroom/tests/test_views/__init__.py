@@ -10,5 +10,6 @@
 """
 from .test_class_activate import *
 from .test_class_create_step import *
+from .test_class_take import *
 from .test_create_classroom import *
 from .test_home import *
