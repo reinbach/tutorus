@@ -71,3 +71,10 @@ class ClassRoom(TimeStampedModel):
         ).annotate(num_votes=Count("question")).order_by("num_votes")
         top_list = [x.question for x in top_list]
         return top_list[:settings.TOP_QUESTIONS_COUNT]
+
+
+class ClassRoomStudentInterest(models.Model):
+    """Track students that are interested in the classroom"""
+    classroom = models.ForeignKey(ClassRoom)
+    student = models.ForeignKey(User)
+    created = models.DateTimeField(auto_now_add=True)
