@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section id="decision">
+    <div class="row">
+        <div class="span3 offset3">
+          <h2>Find Class</h2>
+          <p>Are you looking to learn?</p>
+          <p><a class="btn" href="{% url class_home %}">Find Class »</a></p>
+        </div>
+        <div class="span6">
+          <h2>Create Class</h2>
+          <p>Are you wanting to teach?</p>
+          <p><a class="btn" href='{% url class_create %}'>Create Class »</a></p>
+        </div>
+    </div>
+  </section>
+{% endblock content %}

@@ -96,7 +96,9 @@ def class_activate(request, classroom):
 def class_list(request):
     """List of classes for tutor
 
-    If there are no classes, then redirect to create a class
+    If there are no classes, redirect to user appropriately
+     - if coming from create page, then go home
+     - other to decision page (find / create)
     """
     classrooms = ClassRoom.objects.filter(tutor=request.user)
     if not classrooms.exists():
@@ -105,7 +107,7 @@ def class_list(request):
         # user back to where they came from
         if "from" in request.GET and request.GET['from'] == "create":
             return HttpResponseRedirect(reverse("home"))
-        return HttpResponseRedirect(reverse("class_create"))
+        return render(request, "classroom/decision.html", {})
     context = dict(
         classrooms=classrooms,
         page="class"
