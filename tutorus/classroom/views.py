@@ -12,6 +12,7 @@ from core.utils import publish
 from questions.forms import AskQuestionForm
 from scratchpad.forms import ScratchpadForm
 from scratchpad.models import Scratchpad
+from step.models import Step
 
 from .models import ClassRoom, ClassRoomStudentInterest
 from .forms import ClassRoomForm
@@ -186,6 +187,21 @@ def class_scratchpad(request, classroom):
             return HttpResponseBadRequest(message)
         return HttpResponse(json.dumps(message))
     return HttpResponseNotFound("Need to post")
+
+@login_required
+@tutor_only
+def class_step(request, classroom, step_id):
+    step = get_object_or_404(Step, pk=step_id)
+    channel = "classroom_{0}".format(classroom.pk)
+    pub_message = {
+        "type": "step",
+        "data": {
+            "step": step.pk,
+            "content": step.content
+        }
+    }
+    publish(channel, pub_message)
+    return HttpResponse(json.dumps({"success": True}))
 
 def home(request):
     context = dict(
