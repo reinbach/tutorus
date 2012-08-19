@@ -80,7 +80,9 @@
         </div>
 
         <h3>Scratchpad</h3>
-
+        <form id="scratchpad_form" action="{% url class_take classroom.id %}" method="POST">
+            <textarea name="content" rows="10" style="width: 760px;" disabled="disabled"></textarea>
+         </form>
       </div>
 
       <div class="span4">

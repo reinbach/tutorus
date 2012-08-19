@@ -90,10 +90,12 @@
           </div>
         </div>
         <h3>Scratchpad</h3>
-         <form action="{% url class_take classroom.id %}" method="POST">
+         <form id="scratchpad_form" action="{% url class_take classroom.id %}" method="POST">
             {% csrf_token %}
-            {{ scratchpad_form.as_p }}
-            <input class="btn" type="submit" value="Update Scratchpad">
+            <textarea name="content" rows="10" style="width: 760px;"></textarea>
+            <p>
+              <input class="btn" type="submit" value="Post Scratchpad">
+            </p>
          </form>
       </div>
 
