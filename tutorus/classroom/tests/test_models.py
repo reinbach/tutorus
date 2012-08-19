@@ -85,3 +85,13 @@ class StudentUserIsNotTheTutor(ClassRoomFixture):
 
     def test_it(self):
         self.assertFalse(self.is_tutor)
+
+
+class InitialClassUnansweredQuestions(ClassRoomFixture):
+
+    def setUp(self):
+        self.latest_unanswered_questions = \
+            self.classroom.latest_unanswered_questions()
+
+    def test_it(self):
+        self.assertEqual(len(self.latest_unanswered_questions), 0)
