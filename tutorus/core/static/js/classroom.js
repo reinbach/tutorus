@@ -52,6 +52,19 @@ $(function() {
         });
         return false;
     });
+
+    $('.btnNext').on('click', function() {
+        nextTab();
+    });
+
+    $('.btnPrev').on('click', function() {
+        prevTab();
+    });
+
+    $('a[data-toggle="tab"]').on('shown', function (e) {
+        isLastTab();
+        isFirstTab();
+    });
 });
 
 function subscribeClassRoomChannel(channel, username) {
@@ -175,3 +188,39 @@ function answerQuestion(question) {
 function setScratchpad(message) {
     $("#scratchpad_form textarea").html(message.data);
 }
+
+function nextTab() {
+    var e = $('#steps li.active').next().find('a[data-toggle="tab"]');
+    if (e.length > 0) {
+        e.click();
+    }
+    isLastTab();
+}
+
+function prevTab(elem) {
+    var e = $('#steps li.active').prev().find('a[data-toggle="tab"]');
+    if(e.length > 0) e.click();
+    isFirstTab();
+}
+
+function isLastTab() {
+    var e = $('#steps li:last').hasClass('active');
+
+    if( e ){
+        $('.btnNext').hide();
+    }else{
+        $('.btnNext').show();
+    }
+    return e;
+}
+
+function isFirstTab() {
+    var e = $('#steps li:first').hasClass('active');
+    if( e ){
+        $('.btnPrev').hide();
+    }else{
+        $('.btnPrev').show();
+    }
+    return e;
+}
+

@@ -14,6 +14,7 @@ urlpatterns = patterns(
     (r'^messages/', include('userena.contrib.umessages.urls')),
     (r'^class/', include('classroom.urls')),
     (r'^step/', include('step.urls')),
+    (r'^suggest/', include('suggest.urls')),
 )
 
 urlpatterns += staticfiles_urlpatterns()
