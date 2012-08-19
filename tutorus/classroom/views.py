@@ -94,6 +94,7 @@ def class_activate(request, classroom):
     context = {'classroom': classroom}
     return render(request, 'classroom/steps.html', context)
 
+
 @login_required
 def class_interest(request, classroom_id):
     """Mark students interest in the class"""
@@ -112,6 +113,7 @@ def class_interest(request, classroom_id):
         }
     })
     return HttpResponse(json.dumps({"success": True}))
+
 
 @login_required
 def class_list(request):

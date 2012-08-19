@@ -18,7 +18,7 @@ class UnauthorizedRedirectedClassTake(TestCase):
 
     def setUp(self):
         self.response = self.client.get(reverse('class_take',
-                                                args={'0',}))
+                                                args={'0', }))
 
     def test_response(self):
         self.assertEquals(self.response.status_code, 302)

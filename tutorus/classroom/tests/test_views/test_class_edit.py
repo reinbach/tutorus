@@ -18,7 +18,7 @@ class UnauthorizedRedirectedClassEdit(TestCase):
 
     def setUp(self):
         self.response = self.client.get(reverse('class_edit',
-                                                args={'0',}))
+                                                args={'0', }))
 
     def test_response(self):
         self.assertEquals(self.response.status_code, 302)
