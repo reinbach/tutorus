@@ -13,6 +13,7 @@ from django.test.testcases import TestCase
 
 __docformat__ = 'restructuredtext en'
 
+
 class UnauthorizedRedirectedClassCreate(TestCase):
 
     def setUp(self):
@@ -22,4 +23,3 @@ class UnauthorizedRedirectedClassCreate(TestCase):
         self.assertEquals(self.response.status_code, 302)
         self.assertIn('/accounts/signin/?next=/class/create/',
                       self.response['location'])
-

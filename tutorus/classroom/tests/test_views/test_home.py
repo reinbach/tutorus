@@ -13,6 +13,7 @@ from django.test.testcases import TestCase
 
 __docformat__ = 'restructuredtext en'
 
+
 class SimpleNavigateToHome(TestCase):
 
     def setUp(self):
