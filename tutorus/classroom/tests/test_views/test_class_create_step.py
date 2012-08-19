@@ -14,7 +14,7 @@ from django.test.testcases import TestCase
 __docformat__ = 'restructuredtext en'
 
 
-class UnauthorizedRedirectedClassCreateStep(TestCase):
+class UnauthorizedRedirectedClassStepCreate(TestCase):
 
     def setUp(self):
         self.response = self.client.get(reverse('class_create_step',
