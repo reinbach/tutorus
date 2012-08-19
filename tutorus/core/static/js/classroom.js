@@ -19,12 +19,7 @@ $(function() {
 });
 
 function channel_subscribe(channel, username) {
-    pubnub = PUBNUB.init({
-        publish_key: $("#pubnub").attr("pub-key"),
-        subscribe_key: $("#pubnub").attr("sub-key"),
-        ssl: false,
-    });
-
+    pubnub = getPubNubConn();
     pubnub.subscribe({
         channel: channel,
         restore: false,
@@ -45,29 +40,25 @@ function channel_subscribe(channel, username) {
                 break;
             }
         },
-
         disconnect: function() {
             $('#conn_status').html('<b>Closed</b>');
-	    $('#conn_status').attr("class", "label label-warning")
+	    $('#conn_status').attr("class", "label label-warning");
         },
 
         reconnect: function() {
             $('#conn_status').html('<b>Connected</b>');
-	    $('#conn_status').attr("class", "label label-success")
+	    $('#conn_status').attr("class", "label label-success");
         },
 
         connect: function() {
             $('#conn_status').html('<b>Connected</b>');
-	    $('#conn_status').attr("class", "label label-success")
-
+	    $('#conn_status').attr("class", "label label-success");
             pubnub.publish({
                 channel: channel,
                 message: {"type": "student_connected", "name": username}
-            })
+            });
         }
     });
-
-    return pubnub;
 }
 
 function incrementStudentCount() {
