@@ -54,3 +54,12 @@ class InitialClassRoomsDoNotHaveSteps(ClassRoomFixture):
 
     def test_it(self):
         self.assertEquals(len(self.steps), 0)
+
+
+class InitialClassRoomsAreNotActive(ClassRoomFixture):
+
+    def setUp(self):
+        self.is_active = self.classroom.is_active()
+
+    def test_it(self):
+        self.assertFalse(self.is_active)
