@@ -1,17 +1,28 @@
 # -*- coding: utf-8 -*-
-import datetime
 from south.db import db
 from south.v2 import SchemaMigration
-from django.db import models
+
+from django.conf import settings
 
 
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'Question.student'
-        db.add_column('questions_question', 'student',
-                      self.gf('django.db.models.fields.related.ForeignKey')(
-                          default='', to=orm['auth.User']), keep_default=False)
+
+        DATABASES = getattr(settings, 'DATABASES')
+
+        if DATABASES['default']['ENGINE'] == 'django.db.backends.sqlite3':
+            # Adding field 'Question.student'
+            db.add_column('questions_question', 'student',
+                          self.gf('django.db.models.fields.related.ForeignKey')
+                              (default="", to=orm['auth.User']),
+                                keep_default=False)
+        else:
+            # Adding field 'Question.student'
+            db.add_column('questions_question', 'student',
+                          self.gf('django.db.models.fields.related.ForeignKey')
+                              (default=None, to=orm['auth.User']),
+                          keep_default=False)
 
 
     def backwards(self, orm):

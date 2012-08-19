@@ -1,8 +1,9 @@
-from django.forms import ModelForm, CharField
+from django.forms import ModelForm, CharField, HiddenInput
 from .models import Step
 
 class StepForm(ModelForm):
     name = CharField(required=True)
+    content = CharField(widget=HiddenInput())
 
     class Meta:
         model = Step
