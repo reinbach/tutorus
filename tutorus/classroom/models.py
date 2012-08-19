@@ -72,6 +72,12 @@ class ClassRoom(TimeStampedModel):
         top_list = [x.question for x in top_list]
         return top_list[:settings.TOP_QUESTIONS_COUNT]
 
+    def interest(self):
+        """Get level of interest in class"""
+        return ClassRoomStudentInterest.objects.filter(
+            classroom=self
+        ).count()
+
 
 class ClassRoomStudentInterest(models.Model):
     """Track students that are interested in the classroom"""

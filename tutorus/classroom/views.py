@@ -1,18 +1,20 @@
+import json
 import logging
 
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, get_object_or_404
 
+from core.utils import get_pubnub_connection
 from questions.forms import AskQuestionForm
-
-from .models import ClassRoom
-from .forms import ClassRoomForm
 from scratchpad.forms import ScratchpadForm
 from scratchpad.models import Scratchpad
+
+from .models import ClassRoom, ClassRoomStudentInterest
+from .forms import ClassRoomForm
 
 log = logging.getLogger(__name__)
 
@@ -91,6 +93,25 @@ def class_activate(request, classroom):
     classroom.save()
     context = {'classroom': classroom}
     return render(request, 'classroom/steps.html', context)
+
+@login_required
+def class_interest(request, classroom_id):
+    """Mark students interest in the class"""
+    classroom = get_object_or_404(ClassRoom, pk=classroom_id)
+    interest, r = ClassRoomStudentInterest.objects.get_or_create(
+        student=request.user,
+        classroom=classroom
+    )
+    # publish interest to class channel
+    pubnub = get_pubnub_connection()
+    pubnub.publish({
+        "channel": "tutor_{0}".format(classroom.tutor.pk),
+        "message": {
+            "type": "interest",
+            "interest": classroom.interest(),
+        }
+    })
+    return HttpResponse(json.dumps({"success": True}))
 
 @login_required
 def class_list(request):
