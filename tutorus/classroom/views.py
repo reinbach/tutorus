@@ -139,7 +139,8 @@ def class_list(request):
         return render(request, "classroom/decision.html", {})
     context = dict(
         classrooms=classrooms,
-        page="class"
+        page="class",
+        user=request.user,
     )
     return render(request, 'classroom/list.html', context)
 
