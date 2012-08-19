@@ -9,7 +9,7 @@ function subscribeClassesChannel() {
             // and handle accordingly
             switch (message.type) {
             case "interest":
-                setClassroomInterest();
+                setClassroomInterest(message);
                 break;
             default:
                 console.log(message.type);
@@ -31,4 +31,9 @@ function subscribeClassesChannel() {
 	    $('#conn_status').attr("class", "label label-success");
         }
     });
+}
+
+
+function setClassroomInterest(message) {
+    $("#interest-" + message.classroom).html(message.interest);
 }
