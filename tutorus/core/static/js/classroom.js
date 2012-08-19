@@ -114,7 +114,8 @@ function createQuestion(question) {
       </blockquote>";
 
     if (question.answer) {
-        q += "<blockquote> \
+        q += "<h5>Answer</h5> \
+        <blockquote> \
         <p>" + question.answer + "</p> \
         <small> Tutor</small> \
       </blockquote>";
