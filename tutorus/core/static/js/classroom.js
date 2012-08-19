@@ -10,8 +10,26 @@ $(function() {
                 $("#question-" + d.success).hide();
             },
             error: function(data, error) {
-                alert(data);
-                alert(error);
+                console.log(data);
+                console.log(error);
+            }
+        });
+        return false;
+    });
+
+    $("#top-questions").on("submit", "form", function(event) {
+        event.preventDefault();
+        var answer = $(this);
+        $.ajax({
+            type: "POST",
+            url: answer.attr("action"),
+            data: answer.serializeArray(),
+            success: function(data) {
+                answer.hide();
+            },
+            error: function(data, error) {
+                console.log(data);
+                console.log(error);
             }
         });
         return false;
@@ -37,6 +55,8 @@ function subscribeClassRoomChannel(channel, username) {
             case "top_question":
                 setTopQuestions(message.questions);
                 break;
+            case "answer_question":
+                answerQuestion(message.question);
             default:
                 console.log(message.type);
                 break;
@@ -91,8 +111,16 @@ function createQuestion(question) {
       <blockquote> \
         <p>" + question.content + "</p> \
         <small> " + question.student  + "</small> \
-      </blockquote> \
-    </li>";
+      </blockquote>";
+
+    if (question.answer) {
+        q += "<blockquote> \
+        <p>" + question.answer + "</p> \
+        <small> Tutor</small> \
+      </blockquote>";
+    }
+
+    q += "</li>";
     return q;
 }
 function addQuestion(question) {
@@ -114,4 +142,9 @@ function setTopQuestions(questions) {
         q = createQuestion(questions[i]);
         top_question.append(q);
     }
+}
+
+function answerQuestion(question) {
+    q = createQuestion(question);
+    $("#answer-questions").append(q);
 }

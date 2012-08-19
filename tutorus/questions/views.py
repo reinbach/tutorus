@@ -99,15 +99,14 @@ def answer_question(request, question):
             question = form.save(question)
             channel = "classroom_{0}".format(question.classroom.pk)
             message = {
-                "type": "new_question",
+                "type": "answer_question",
                 "question": {
                     "pk": question.pk,
                     "subject": question.subject,
                     "content": question.content,
                     "student": question.student.username,
-                    "up_vote_url": reverse(
-                        "question_up_vote", args=[question.pk]
-                    ),
+                    "vote_count": question.vote_count(),
+                    "answer": question.answer,
                 }
             }
             publish(channel, message)

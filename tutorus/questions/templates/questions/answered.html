@@ -1,0 +1,19 @@
+<ul class="unstyled" id="answered-questions">
+  {% for question in questions %}
+    <li id="answered-question-{{ question.pk }}">
+      <h4>
+        <span class="label label-success">{{ question.vote_count }}</span>
+        {{ question.subject }}
+      </h4>
+      <blockquote>
+        <p>{{ question.content }}</p>
+        <small> {{ question.student.username }}</small>
+      </blockquote>
+      <h5>Answer</h5>
+      <blockquote>
+        <p>{{ question.answer }}</p>
+        <small> {{ question.classroom.tutor.username }}</small>
+      </blockquote>
+    </li>
+  {% endfor %}
+</ul>

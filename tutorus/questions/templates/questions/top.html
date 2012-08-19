@@ -11,7 +11,8 @@
       </blockquote>
       {% if is_tutor %}
         <form method="post" id="answer_form" action="{% url question_answer question.pk %}">
-          <textarea cols="20" rows="5"></textarea>
+          {% csrf_token %}
+          <textarea name="answer" cols="20" rows="5"></textarea>
           <p><input class="btn" type="submit" value="Post Answer" /></p>
         </form>
       {% endif %}

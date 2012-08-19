@@ -1,6 +1,9 @@
+import datetime
+
 from django import forms
 
 from models import Question
+from constants import ANSWERED
 
 class AskQuestionForm(forms.ModelForm):
     subject = forms.CharField(required=True)
@@ -22,5 +25,7 @@ class AnswerQuestionForm(forms.Form):
 
     def save(self, question):
         question.answer = self.cleaned_data['answer']
+        question.answer_date = datetime.datetime.now()
+        question.status = ANSWERED
         question.save()
         return question

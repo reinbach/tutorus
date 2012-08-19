@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 
 from core.utils import get_pubnub_connection
-from questions.forms import AskQuestionForm
+from questions.forms import AskQuestionForm, AnswerQuestionForm
 from scratchpad.forms import ScratchpadForm
 from scratchpad.models import Scratchpad
 
