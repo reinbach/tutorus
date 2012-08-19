@@ -18,7 +18,7 @@ $(function() {
     });
 });
 
-function channel_subscribe(channel, username) {
+function subscribeClassRoomChannel(channel, username) {
     pubnub = getPubNubConn();
     pubnub.subscribe({
         channel: channel,
