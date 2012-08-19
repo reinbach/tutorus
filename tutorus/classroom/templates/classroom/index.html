@@ -30,10 +30,12 @@
         <div class="span4">
           <h2>{{ classroom.name }}</h2>
           <p>{{ classroom.description }}</p>
-          {% if classroom.is_active %}
-              <a class="btn btn-primary btn-small" href="{% url class_take classroom.pk %}">Enter Class</a>
+          {% if user.is_authenticated %}
+            {% if classroom.is_active %}
+                <a class="btn btn-primary btn-small" href="{% url class_take classroom.pk %}">Enter Class</a>
+            {% endif %}
+            <a class="btn btn-info btn-small interest" href="{% url class_interest classroom.pk %}">I'm Interested</a>
           {% endif %}
-          <a class="btn btn-info btn-small interest" href="{% url class_interest classroom.pk %}">I'm Interested</a>
         </div>
       {% endfor %}
     </div>
