@@ -7,23 +7,22 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/classroom.js"></script>
     <script type="text/javascript">
       $(function() {
+        subscribeClassRoomChannel("classroom_{{ classroom.pk }}", "{{ user.username }}");
+
         $(".collapse").collapse();
-      });
 
-      $(function() {
+        $('.btnNext').on('click', function() {
+          nextTab();
+        });
 
-          $('.btnNext').on('click', function() {
-              nextTab();
-          });
+        $('.btnPrev').on('click', function() {
+          prevTab();
+        });
 
-          $('.btnPrev').on('click', function() {
-              prevTab();
-          });
-
-          $('a[data-toggle="tab"]').on('shown', function (e) {
-            isLastTab();
-            isFirstTab();
-          });
+        $('a[data-toggle="tab"]').on('shown', function (e) {
+          isLastTab();
+          isFirstTab();
+        });
       });
 
       function nextTab() {
