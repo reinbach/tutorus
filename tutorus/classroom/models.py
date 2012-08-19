@@ -28,7 +28,7 @@ class ClassRoom(TimeStampedModel):
 
     @property
     def steps(self):
-        return self.step_set.all()
+        return self.step_set.all().order_by("step_order")
 
     def is_active(self):
         return True if self.status == "active" else False
