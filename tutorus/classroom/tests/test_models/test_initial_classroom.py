@@ -2,10 +2,10 @@
 
 """
 
-    classroom.tests.test_models
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    classroom.tests.test_models.test_initial_classroom
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    `model` tests
+    Initial classroom tests
 
 """
 from django.contrib.auth.models import User
@@ -92,8 +92,8 @@ class StudentUserIsNotTheTutor(ClassRoomFixture):
 class InitialClassUnansweredQuestions(ClassRoomFixture):
 
     def setUp(self):
-        self.latest_unanswered_questions = \
-            self.classroom.latest_unanswered_questions()
+        self.latest_unanswered_questions =\
+        self.classroom.latest_unanswered_questions()
 
     def test_it(self):
         self.assertEqual(len(self.latest_unanswered_questions), 0)
@@ -103,7 +103,7 @@ class InitialClassUnansweredQuestionsTutor(ClassRoomFixture):
 
     def setUp(self):
         self.latest_unanswered_questions =\
-            self.classroom.latest_unanswered_questions(self.tutor_user)
+        self.classroom.latest_unanswered_questions(self.tutor_user)
 
     def test_it(self):
         self.assertEqual(len(self.latest_unanswered_questions), 0)

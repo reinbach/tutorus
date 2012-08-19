@@ -4,7 +4,6 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Count
-from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 
 from model_utils.fields import StatusField
@@ -12,6 +11,7 @@ from model_utils import Choices
 from model_utils.models import TimeStampedModel
 
 from questions import constants as question_constants
+from utils import slugify_uniquely
 
 log = logging.getLogger(__name__)
 
@@ -22,13 +22,13 @@ class ClassRoom(TimeStampedModel):
     STATUS = Choices('draft', 'active', 'closed')
 
     name = models.CharField(_('name'), max_length=255, blank=True)
-    slug = models.SlugField(null=True, blank=True, default="")
+    slug = models.SlugField(null=True, blank=True, default="", unique=True)
     tutor = models.ForeignKey(User, verbose_name=_('tutor'))
     description = models.TextField(blank=True, null=True, default="")
     status = StatusField(default=STATUS.draft)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        self.slug = slugify_uniquely(self.name, self.__class__)
         super(ClassRoom, self).save(*args, **kwargs)
 
     @property
