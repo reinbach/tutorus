@@ -48,11 +48,11 @@
            .closest('.control-group').addClass('success');
           }
         });
-        
+
       $('#clear_button').click(function() {
           validator.resetForm();
       });
-        
+
       });
     </script>
 {% endblock page-js %}
@@ -114,6 +114,16 @@
                 <div id="max_new_question_count" style="display: none;">{{ latest_questions_count }}</div>
                 {% latest_questions classroom user %}
               </div>
+            </div>
+          </div>
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordian-toggle" href="#class-answers" data-parent="#class-accordian" data-toggle="collapse">
+               <i class='icon-comments icon-large'></i> Answers
+              </a>
+            </div>
+            <div id="class-answers" class="accordion-body collapse in">
+              <div class="accordion-inner">{% answered_questions classroom %}</div>
             </div>
           </div>
           <div class="accordion-group">

@@ -75,6 +75,8 @@ function subscribeClassRoomChannel(channel, username) {
                 break;
             case "answer_question":
                 answerQuestion(message.question);
+            case "scratchpad":
+                setScratchpad(message);
             default:
                 console.log(message.type);
                 break;
@@ -157,7 +159,7 @@ function setTopQuestions(questions) {
     // for now to reload the top questions
     var top_question = $("#top-questions");
     top_question.find("li").remove();
-    for (i = 0; i <= questions.length; i++) {
+    for (i = 0; i < questions.length; i++) {
         q = createQuestion(questions[i]);
         top_question.append(q);
     }
@@ -168,4 +170,8 @@ function answerQuestion(question) {
     $("#answered-questions").append(q);
     // remove question from top questions
     $("#top-question-" + question.pk).hide();
+}
+
+function setScratchpad(message) {
+    $("#scratchpad_form textarea").html(message.data);
 }
