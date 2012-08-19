@@ -12,4 +12,9 @@ urlpatterns = patterns(
     url(r'^(?P<classroom_id>\w+)/take/$', views.class_take, name='class_take'),
     url(r'^(?P<classroom_id>\w+)/edit/$', views.edit_classroom,
         name='class_edit'),
+    url(
+        r'^(?P<classroom_id>\w+)/interest/$',
+        views.class_interest,
+        name='class_interest'
+    ),
     url(r'^$', views.home, name='class_home'),)
