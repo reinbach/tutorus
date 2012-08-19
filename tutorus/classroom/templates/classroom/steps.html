@@ -8,7 +8,7 @@
       $(function() {
         $("#stepModal").modal("show");
       });
-      
+
     </script>
 {% endblock page-js %}
 
@@ -36,7 +36,7 @@
           {% if not classroom.status == 'active' %}
             <li><a href="{% url class_activate classroom.pk %}"><i class='icon-check'></i> Activate Class</a></li>
           {% endif %}
-          
+
           <li class="nav-header">Info</li>
           <li><i class="icon-user"></i> {{classroom.tutor.username}}</li>
           <li><i class="icon-exclamation-sign"></i> {{classroom.status}}</li>
@@ -45,9 +45,11 @@
         <div class="tab-content">
           {% for step in classroom.steps %}
             <div class="tab-pane{% if forloop.first %} active{%endif %}" id="step{{step.pk}}">
-                <a class='btn btn-primary btn-mini' href="{% url step_edit classroom.pk step.pk %}"><i class="icon-edit icon-white"></i> Edit Step</a>
-                <a class='btn btn-danger btn-mini' href="{% url step_delete classroom.pk step.pk %}"><i class="icon-remove-sign icon-white"></i> Delete Step</a>
-                <div class="well" style="padding: 8px 0; height: 450px;">
+                <p>
+                  <a class='btn btn-primary btn-mini' href="{% url step_edit classroom.pk step.pk %}"><i class="icon-edit icon-white"></i> Edit Step</a>
+                  <a class='btn btn-danger btn-mini' href="{% url step_delete classroom.pk step.pk %}"><i class="icon-remove-sign icon-white"></i> Delete Step</a>
+                </p>
+                <div class="well">
                  <p>{{step.content|safe}}</p>
                 </div>
             </div>

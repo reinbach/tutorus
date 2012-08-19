@@ -82,7 +82,7 @@
           <div class="tab-content">
             {% for step in classroom.steps %}
               <div class="tab-pane{% if forloop.first %} active{%endif %}" id="step{{step.pk}}">
-                <div class="well" style="padding: 8px 0; height: 450px;">
+                <div class="well">
                  <p>{{ step.content|safe }}</p>
                 </div>
               </div>
@@ -90,10 +90,12 @@
           </div>
         </div>
         <h3>Scratchpad</h3>
-         <form action="{% url class_take classroom.id %}" method="POST">
+         <form id="scratchpad_form" action="{% url class_take classroom.id %}" method="POST">
             {% csrf_token %}
-            {{ scratchpad_form.as_p }}
-            <input class="btn" type="submit" value="Update Scratchpad">
+            <textarea name="content" rows="10" style="width: 760px;"></textarea>
+            <p>
+              <input class="btn" type="submit" value="Post Scratchpad">
+            </p>
          </form>
       </div>
 
@@ -126,7 +128,9 @@
               </a>
             </div>
             <div id="class-status" class="accordion-body collapse in">
-              <div class="accordion-inner">Status information about class</div>
+              <div class="accordion-inner">
+                {% include "classroom/status.html" %}
+              </div>
             </div>
           </div>
         </div>
