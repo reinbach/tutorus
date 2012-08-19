@@ -90,7 +90,7 @@
           </div>
         </div>
         <h3>Scratchpad</h3>
-         <form id="scratchpad_form" action="{% url class_take classroom.id %}" method="POST">
+         <form id="scratchpad_form" action="{% url class_scratchpad classroom.id %}" method="post">
             {% csrf_token %}
             <textarea name="content" rows="10" style="width: 760px;"></textarea>
             <p>

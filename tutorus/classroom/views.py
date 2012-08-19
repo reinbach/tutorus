@@ -5,11 +5,11 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest, HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
 
-from core.utils import get_pubnub_connection
-from questions.forms import AskQuestionForm, AnswerQuestionForm
+from core.utils import publish
+from questions.forms import AskQuestionForm
 from scratchpad.forms import ScratchpadForm
 from scratchpad.models import Scratchpad
 
@@ -105,15 +105,13 @@ def class_interest(request, classroom_id):
     )
     # publish interest to class channel, only if interest added
     if created:
-        pubnub = get_pubnub_connection()
-        pubnub.publish({
-            "channel": "classes",
-            "message": {
-                "type": "interest",
-                "classroom": classroom.pk,
-                "interest": classroom.interest(),
-            }
-        })
+        channel = "classes"
+        message = {
+            "type": "interest",
+            "classroom": classroom.pk,
+            "interest": classroom.interest(),
+        }
+        publish(channel, message)
     return HttpResponse(json.dumps({"success": True}))
 
 
@@ -169,6 +167,25 @@ def class_take(request, classroom_id):
     )
     return render(request, "classroom/take_student.html", context)
 
+@login_required
+@tutor_only
+def class_scratchpad(request, classroom):
+    """Publish scratchpad to students"""
+    if request.method == 'POST':
+        form = ScratchpadForm(data=request.POST)
+        if form.is_valid():
+            message = {"success": True}
+            channel = "classroom_{0}".format(classroom.pk)
+            pub_message = {
+                "type": "scratchpad",
+                "data": form.cleaned_data['content']
+            }
+            publish(channel, pub_message)
+        else:
+            message = {"error": form.errors}
+            return HttpResponseBadRequest(message)
+        return HttpResponse(json.dumps(message))
+    return HttpResponseNotFound("Need to post")
 
 def home(request):
     context = dict(

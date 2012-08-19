@@ -17,4 +17,9 @@ urlpatterns = patterns(
         views.class_interest,
         name='class_interest'
     ),
+    url(
+        r'^(?P<classroom_id>\w+)/scratchpad/$',
+        views.class_scratchpad,
+        name='class_scratchpad'
+    ),
     url(r'^$', views.home, name='class_home'),)

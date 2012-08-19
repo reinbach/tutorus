@@ -34,6 +34,24 @@ $(function() {
         });
         return false;
     });
+
+    $("#scratchpad_form").on("submit", function(event) {
+        event.preventDefault();
+        var scratchpad = $(this);
+        $.ajax({
+            type: "POST",
+            url: scratchpad.attr("action"),
+            data: scratchpad.serializeArray(),
+            success: function(data) {
+                console.log(data);
+            },
+            error: function(data, error) {
+                console.log(data);
+                console.log(error);
+            }
+        });
+        return false;
+    });
 });
 
 function subscribeClassRoomChannel(channel, username) {
