@@ -67,7 +67,7 @@
       <div class="span8">
         <h3>Step: <span id="step_name">{{ first_step.name }}</span></h3>
         <div class="well">
-          <p id="step_content">{{ first_step.content }}</p>
+          <p id="step_content">{{ first_step.content|safe }}</p>
         </div>
 
         <h3>Scratchpad</h3>
