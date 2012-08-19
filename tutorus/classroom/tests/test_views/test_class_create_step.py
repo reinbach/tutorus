@@ -8,9 +8,6 @@
     `create step` view tests
 
 """
-
-__docformat__ = 'restructuredtext en'
-
 from django.core.urlresolvers import reverse
 from django.test.testcases import TestCase
 
@@ -20,7 +17,8 @@ __docformat__ = 'restructuredtext en'
 class UnauthorizedRedirectedClassCreateStep(TestCase):
 
     def setUp(self):
-        self.response = self.client.get(reverse('class_create_step', args={'0',}))
+        self.response = self.client.get(reverse('class_create_step',
+                                                args={'0',}))
 
     def test_response(self):
         self.assertEquals(self.response.status_code, 302)
