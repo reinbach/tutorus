@@ -34,6 +34,11 @@
       <div class="navbar-inner">
     <div class="container">
       <a class="brand" href="/">TutorUs</a>
+      {% if user.is_authenticated %}
+        <ul class="nav">
+          <li {% if page == "class" %}class="active"{% endif %}><a href="{% url class_list %}">My Classes</a></li>
+        </ul>
+      {% endif %}
       <ul class="nav pull-right">
         <li><a href="#"><span id="conn_status" class="label">Not Connected</span></a></li>
           {% if user.is_authenticated %}

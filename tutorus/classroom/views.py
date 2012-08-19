@@ -107,7 +107,8 @@ def class_list(request):
             return HttpResponseRedirect(reverse("home"))
         return HttpResponseRedirect(reverse("class_create"))
     context = dict(
-        classrooms=classrooms
+        classrooms=classrooms,
+        page="class"
     )
     return render(request, 'classroom/list.html', context)
 
