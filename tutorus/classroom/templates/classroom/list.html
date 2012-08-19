@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section id="classroom">
+    <div class="page-header">
+      <h1>Classrooms <small>helping to educate the world</small></h1>
+    </div>
+    <div class="row">
+      <div class="span12">
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for classroom in classrooms %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><h2>{{ classroom.name }} </h2></td>
+                <td>{{ classroom.description }}</td>
+                <td>[{{ classroom.status }}]</td>
+                <td>
+                  <a href='{% url class_create_step classroom.pk %}'><i class="icon-pencil"></i></a>
+                  <a class="btn btn-primary btn-small" href="{% url class_take classroom.pk %}">Enter Class</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <p><a class="btn" href='{% url class_create %}'>Create Class »</a></p>
+
+      </div>
+    </div>
+  </section>
+{% endblock content %}
