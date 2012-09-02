@@ -1,0 +1,36 @@
+body {
+    padding-top: 60px;
+    background: url(../img/concrete_wall.png);
+}
+
+#content {
+    background-color: #fff;
+    border-radius: 6px 6px 6px 6px;
+    margin-bottom: 30px;
+    padding: 60px;
+}
+
+.hero-unit {
+    background-color: #fff;
+    text-align: center;
+}
+
+.accordion-heading {
+    padding: 8px 15px;
+}
+
+label.valid {
+    width: 24px;
+    height: 24px;
+    background: url(../img/valid.png) center center no-repeat;
+    display: inline-block;
+    text-indent: -9999px;
+}
+
+label.error {
+    font-weight: bold;
+    color: red;
+    padding: 2px 8px;
+    margin-top: 2px;
+}
+

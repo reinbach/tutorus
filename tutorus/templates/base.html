@@ -5,29 +5,13 @@
     <title>{% block title %}{% endblock title %} TutorUs</title>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/tutorus.css">
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/tutorus.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/validator.js"></script>
     <script src="http://cdn.pubnub.com/pubnub-3.1.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/pubnub.js"></script>
-    <style type="text/css" media="screen">
-      body { padding-top: 60px; }
-      .accordion-heading { padding: 8px 15px; }
-    label.valid {
-      width: 24px;
-      height: 24px;
-      background: url({{ STATIC_URL }}img/valid.png) center center no-repeat;
-      display: inline-block;
-      text-indent: -9999px;
-    }
-    label.error {
-      font-weight: bold;
-      color: red;
-      padding: 2px 8px;
-      margin-top: 2px;
-    }
-    </style>
     {% block page-css %}{% endblock page-css %}
   </head>
   <body>
@@ -45,7 +29,11 @@
           {% if user.is_authenticated %}
               <li><a href="{% url userena_profile_list %}"><span>{% trans 'All profiles' %}</span></a></li>
               <li><a href="{% url userena_umessages_list %}"><span>{% trans 'Messages' %}</span></a></li>
-              <li><a href="{% url userena_profile_detail user.username %}"><span>{% trans 'Account' %} ({{ user.username }})</span></a></li>
+              <li>
+                <a href="{% url userena_profile_detail user.username %}">
+                  <span>{% trans 'Account' %} ({{ user.username }})</span>
+                </a>
+              </li>
               <li><a href="{% url userena_signout %}"><span>{% trans 'Signout' %}</span></a></li>
           {% else %}
               <li><a href="{% url userena_signin %}"><span>{% trans 'Signin' %}</span></a></li>
@@ -55,7 +43,7 @@
     </div>
       </div>
     </div>
-    <div class="container">
+    <div class="container" id="content">
       <!-- Messages just putting here for now, need better place -->
       {% if messages %}
         <ul class="messages">
@@ -63,7 +51,7 @@
           <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
           {% endfor %}
         </ul>
-       <!--  End message just putting here for now, need better place -->
+        <!--  End message just putting here for now, need better place -->
       {% endif %}
       {% block content_title %}{% endblock %}
       {% block content %}{% endblock content %}
